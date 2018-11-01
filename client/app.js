@@ -7,6 +7,7 @@ import canvg from 'canvg'
 import QRious from 'qrious'
 
 import Inputs from './inputs'
+import Canvas from './canvas'
 
 const dataModel = {
     meetupData: {
@@ -85,9 +86,12 @@ const genPdf = () => {
 }
 
 const App = (props) => (
-    <div>
+    <div id="appContainer">
         <h1>Meetup Utils</h1>
-        <Inputs />
+        <div className="app-container-row">
+            <Inputs />
+            <Canvas />
+        </div>
         <button onClick={genPdf}>Generate PDF...</button>
     </div>
 );

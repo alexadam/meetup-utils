@@ -1,5 +1,67 @@
-$color: yellow;
 
-h1 {
-    background-color: $color;
+html, body {
+    height: 100%; width: 100%; padding: 0; margin: 0;
+}
+
+* {box-sizing: border-box;}
+
+#app {
+    height: 100%; width: 100%; padding: 0; margin: 0;
+}
+
+#appContainer {
+    height: 100%; width: 100%; padding: 0; margin: 0;
+}
+.app-container-row {
+    display: flex; flex-flow: row; width: 100%; height: 100%;
+}
+
+.mtu-canvas-container {
+    width: 100%; height: 100%; display: flex; flex-flow: column; justify-content: center; align-items: center;
+    padding: 20px;
+    background-color: gray;
+}
+
+.mtu-canvas {
+    size: 21cm 29.7cm;
+    height: 21cm;
+    width : 29.7cm;
+    // padding: 100px;
+    background-color: white;
+    position: relative;
+    box-sizing: border-box;
+}
+.mtu-canvas-row {
+    display: flex; flex-flow: row; width: 100%;
+}
+.mtu-canvas-element {
+    position: absolute;
+}
+
+.mtu-input-container {
+    width: 300px;
+    height: 100%;
+    padding: 5px;
+    display: flex; flex-flow: column;
+}
+
+.mtu-input {
+    display: flex; flex-flow: column;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.mtu-input-label {
+    margin-bottom: 5px;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.mtu-input-component {
+    font-family: sans-serif;
+    font-size: 12px;
+    padding: 3px;
+    line-height: 100%;
+    vertical-align: middle;
 }
