@@ -9,6 +9,8 @@ import QRious from 'qrious'
 import Inputs from './inputs'
 import Canvas from './canvas'
 
+import BuildPDF from './buildPDF'
+
 const dataModel = {
     meetupData: {
         meetupName: 'Research in Cluj',
@@ -26,63 +28,80 @@ const dataModel = {
 
 }
 
-const  getTextWidth = (text, font) => {
-    // TODO re-use canvas object for better performance
-    let canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
-    let context = canvas.getContext("2d");
-    context.font = font;
-    let metrics = context.measureText(text);
-    return metrics.width;
-}
-
-const genPdf = () => {
-    let doc = new jsPDF({
-      orientation: 'landscape',
-      unit: 'mm',
-      format: [297, 210]
-    })
-
-    let meetupName = dataModel.meetupData.meetupName
-    let splitMeetupName = doc.splitTextToSize(meetupName, 200);
-    let smnSize = getTextWidth(meetupName, 'normal 40px helvetica')
-    console.log('splitMeetupName', splitMeetupName, smnSize);
-    // doc.addFont('Arial', 'normal');
-    doc.setFont('helvetica');
-    doc.setFontSize(40);
-
-    // center
-    var textWidth = doc.getStringUnitWidth(splitMeetupName[0]) * doc.internal.getFontSize() / doc.internal.scaleFactor;
-    console.log('text width', textWidth);
-    var textOffset = (297 - smnSize) / 2;
-
-    doc.text(splitMeetupName, textOffset, 75);
-
-
-    let text = dataModel.meetupData.eventName
-    let splitTitle = doc.splitTextToSize(text, 200);
-    let smnSize2 = getTextWidth(text, 'normal 20px helvetica')
-    console.log('splitTitle', splitTitle, smnSize2);
-    // doc.addFont('Arial', 'normal');
-    doc.setFont('helvetica');
-    doc.setFontSize(20);
-    doc.text(splitTitle, 50, 90);
-
-    // logo
-    // var canvas = document.createElement('canvas');
-    // canvg(canvas, Logos.MeetupSVGLogo);
-    // var imgData = canvas.toDataURL('image/png');
-    // doc.addImage(imgData, 'PNG', 1.5, 0.25, 1.3, 0.5);
-    doc.addImage(Logos.MeetupPNGBase64Logo, 'PNG', 100, 25, 100, 35);
-
-    // QR code
-    let qr = new QRious({
-      value: dataModel.meetupData.eventLink
-    });
-    let qrImage = qr.toDataURL();
-    doc.addImage(qrImage, 'PNG', 100, 120, 30, 30);
-
-
-    doc.save('meetup.pdf')
+const dataModel2 = {
+    meetupData: [
+        {
+            label: 'Meetup Logo',
+            type: 'image',
+            value: 'meetup-logo',
+            id: 'meetupLogo',
+            graphic: {
+                type: 'image',
+                x: 100,
+                y: 24,
+                width: 100,
+                height: 35,
+                centerHorizontal: true,
+                centerVertical: false,
+            }
+        },
+        {
+            label: 'Meetup Name',
+            type: 'text',
+            value: 'Research in Cluj',
+            id: 'meetupName',
+            graphic: {
+                type: 'text',
+                x: 10,
+                y: 90,
+                width: 100,
+                height: 35,
+                wrapText: true,
+                fontSize: 70,
+                fontFamily: 'helvetica',
+                fontWeight: 'normal',
+                centerText: true
+            }
+        },
+        {
+            label: 'Event Name',
+            type: 'text',
+            value: 'Super Event',
+            id: 'eventName',
+            graphic: {
+                type: 'text',
+                x: 10,
+                y: 110,
+                width: 200,
+                height: 35,
+                wrapText: true,
+                fontSize: 30,
+                fontFamily: 'helvetica',
+                fontWeight: 'normal',
+                centerText: true
+            }
+        },
+        {
+            label: 'QR Code',
+            type: 'text',
+            value: 'https://www.meetup.com/research-in-cluj/events/255360569/',
+            id: 'meetupQR',
+            graphic: {
+                type: 'qr',
+                x: 135,
+                y: 140,
+                width: 30,
+                height: 30,
+            }
+        },
+    ],
+    posterData: {
+        orientation: 'landscape',
+        format: 'a4',
+        width: 297,
+        height: 210,
+        units: 'mm',
+    }
 }
 
 const App = (props) => (
@@ -92,7 +111,7 @@ const App = (props) => (
             <Inputs />
             <Canvas />
         </div>
-        <button onClick={genPdf}>Generate PDF...</button>
+        <button onClick={() => BuildPDF(dataModel2)}>Generate PDF...</button>
     </div>
 );
 
