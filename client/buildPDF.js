@@ -96,8 +96,7 @@ const addQRCode = (doc, qrData, posterData) => {
         qrData.graphic.height);
 }
 
-export default (pdfData) => {
-
+function prepareDoc(pdfData) {
     let posterData = pdfData.posterData
     let doc = createPDFDoc(posterData.orientation, posterData.format, posterData.width, posterData.height)
 
@@ -111,5 +110,17 @@ export default (pdfData) => {
         }
     }
 
+    return doc
+}
+
+function getPdfUrl(pdfData) {
+    let doc = prepareDoc(pdfData)
+    return doc.output('datauristring')
+}
+
+function savePdf(pdfData) {
+    let doc = prepareDoc(pdfData)
     doc.save('meetup.pdf')
 }
+
+export {getPdfUrl, savePdf}

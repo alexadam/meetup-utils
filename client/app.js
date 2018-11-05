@@ -7,10 +7,10 @@ import canvg from 'canvg'
 import QRious from 'qrious'
 
 import Inputs from './inputs'
-import Canvas from './canvas'
 import TemplateGallery from './templateGallery'
+import PDFPreview from './pdfPreview'
 
-import BuildPDF from './buildPDF'
+import {getPdfUrl, savePdf} from './buildPDF'
 
 const dataModel = {
     meetupData: {
@@ -36,6 +36,7 @@ const dataModel2 = {
             type: 'image',
             value: 'meetup-logo',
             id: 'meetupLogo',
+            include: true,
             graphic: {
                 type: 'image',
                 x: 100,
@@ -51,6 +52,7 @@ const dataModel2 = {
             type: 'text',
             value: 'Research in Cluj',
             id: 'meetupName',
+            include: true,
             graphic: {
                 type: 'text',
                 x: 10,
@@ -69,6 +71,7 @@ const dataModel2 = {
             type: 'text',
             value: 'Super Event',
             id: 'eventName',
+            include: true,
             graphic: {
                 type: 'text',
                 x: 10,
@@ -87,6 +90,7 @@ const dataModel2 = {
             type: 'text',
             value: 'https://www.meetup.com/research-in-cluj/events/255360569/',
             id: 'meetupQR',
+            include: true,
             graphic: {
                 type: 'qr',
                 x: 135,
@@ -105,19 +109,35 @@ const dataModel2 = {
     }
 }
 
-const App = (props) => (
-    <div id="appContainer">
-        <h1>Meetup Utils</h1>
-        <div className="app-container-row">
-            <TemplateGallery />
+class App extends React.Component {
+
+    state = {
+        pdf: null,
+        dataModel: dataModel2
+    }
+
+    onNewData = (newData) => {
+        let newPdf = getPdfUrl(newData)
+        this.setState({
+            dataModel: newData,
+            pdf: newPdf
+        })
+    }
+
+    render = () => (
+        <div id="appContainer">
+            <h1>Meetup Utils</h1>
+            <div className="app-container-row">
+                <TemplateGallery />
+            </div>
+            <div className="app-container-row">
+                <Inputs data={this.state.dataModel} onNewData={this.onNewData} />
+                <PDFPreview data={this.state.pdf}/>
+            </div>
+            <button onClick={() => savePdf(this.state.dataModel)}>Save PDF...</button>
         </div>
-        <div className="app-container-row">
-            <Inputs />
-            <Canvas />
-        </div>
-        <button onClick={() => BuildPDF(dataModel2)}>Generate PDF...</button>
-    </div>
-);
+    );
+}
 
 ReactDOM.render((
     <App/>
