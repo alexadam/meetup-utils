@@ -8,6 +8,7 @@ import QRious from 'qrious'
 
 import Inputs from './inputs'
 import Canvas from './canvas'
+import TemplateGallery from './templateGallery'
 
 import BuildPDF from './buildPDF'
 
@@ -107,6 +108,9 @@ const dataModel2 = {
 const App = (props) => (
     <div id="appContainer">
         <h1>Meetup Utils</h1>
+        <div className="app-container-row">
+            <TemplateGallery />
+        </div>
         <div className="app-container-row">
             <Inputs />
             <Canvas />
