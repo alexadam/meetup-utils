@@ -1,5 +1,5 @@
 import React from 'react'
-import * as Logos from './logos'
+// import * as Logos from './logos'
 // import InlineEdit from 'react-edit-inline';
 
 

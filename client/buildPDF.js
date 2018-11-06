@@ -1,5 +1,4 @@
 import * as jsPDF from 'jspdf'
-import * as Logos from './logos'
 import canvg from 'canvg'
 import QRious from 'qrious'
 
@@ -66,19 +65,37 @@ const addText = (doc, textData, posterData) => {
     doc.text(splitText, offsetX, textData.graphic.y);
 }
 
-const addImage = (doc, imageData, posterData) => {
-    let imgSrc = imageData.value
-    if (imgSrc === 'meetup-logo') {
-        imgSrc = Logos.MeetupPNGBase64Logo
-    }
-    let offsetX = centerHorizontal(posterData, imageData)
-    let offsetY = centerVertical(posterData, imageData)
+const getImageDataURL = (imgSrc, callback) => {
+    let image = new Image();
 
-    doc.addImage(Logos.MeetupPNGBase64Logo, 'PNG',
-        offsetX,
-        offsetY,
-        imageData.graphic.width,
-        imageData.graphic.height);
+    image.onload = () => {
+        let canvas = document.createElement('canvas');
+        canvas.width = image.naturalWidth;
+        canvas.height = image.naturalHeight;
+        canvas.getContext('2d').drawImage(image, 0, 0);
+        callback(canvas.toDataURL('image/png'));
+    };
+
+    image.src = imgSrc;
+}
+
+const addImage = (doc, imageData, posterData) => {
+    return new Promise((resolve, reject)=>{
+        getImageDataURL(imageData.value, (imgData) => {
+                let offsetX = centerHorizontal(posterData, imageData)
+                let offsetY = centerVertical(posterData, imageData)
+
+                doc.addImage(imgData, 'PNG',
+                    offsetX,
+                    offsetY,
+                    imageData.graphic.width,
+                    imageData.graphic.height);
+
+                    console.log('resolve');
+
+                resolve()
+        } )
+    })
 }
 
 const addQRCode = (doc, qrData, posterData) => {
@@ -96,31 +113,36 @@ const addQRCode = (doc, qrData, posterData) => {
         qrData.graphic.height);
 }
 
-function prepareDoc(pdfData) {
+function prepareDoc(pdfData, onDocReady) {
     let posterData = pdfData.posterData
     let doc = createPDFDoc(posterData.orientation, posterData.format, posterData.width, posterData.height)
+    let allPromises = []
 
+    // first add the images & remote data
     for (let item of pdfData.meetupData) {
-        if (item.graphic.type === 'text') {
-            addText(doc, item, pdfData.posterData)
-        } else if (item.graphic.type === 'image') {
-            addImage(doc, item, pdfData.posterData)
-        } else if (item.graphic.type === 'qr') {
-            addQRCode(doc, item, pdfData.posterData)
+        if (item.graphic.type === 'image') {
+            allPromises.push(addImage(doc, item, pdfData.posterData))
         }
     }
 
-    return doc
+    Promise.all(allPromises).then(() => {
+        for (let item of pdfData.meetupData) {
+            if (item.graphic.type === 'text') {
+                addText(doc, item, pdfData.posterData)
+            } else if (item.graphic.type === 'qr') {
+                addQRCode(doc, item, pdfData.posterData)
+            }
+        }
+        onDocReady(doc)
+    })
 }
 
-function getPdfUrl(pdfData) {
-    let doc = prepareDoc(pdfData)
-    return doc.output('datauristring')
+function getPdfUrl(pdfData, onDocReady) {
+    prepareDoc(pdfData, (doc) => onDocReady(doc.output('datauristring')))
 }
 
 function savePdf(pdfData) {
-    let doc = prepareDoc(pdfData)
-    doc.save('meetup.pdf')
+    prepareDoc(pdfData, (doc) => doc.save('meetup.pdf'))
 }
 
 export {getPdfUrl, savePdf}

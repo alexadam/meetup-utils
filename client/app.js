@@ -34,7 +34,7 @@ const dataModel2 = {
         {
             label: 'Meetup Logo',
             type: 'image',
-            value: 'meetup-logo',
+            value: '/client/assets/meetup-logo-300.png',
             id: 'meetupLogo',
             include: true,
             graphic: {
@@ -117,10 +117,11 @@ class App extends React.Component {
     }
 
     onNewData = (newData) => {
-        let newPdf = getPdfUrl(newData)
-        this.setState({
-            dataModel: newData,
-            pdf: newPdf
+        getPdfUrl(newData, (newPdf) => {
+            this.setState({
+                dataModel: newData,
+                pdf: newPdf
+            })
         })
     }
 
