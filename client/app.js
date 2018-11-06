@@ -106,6 +106,13 @@ const dataModel2 = {
         width: 297,
         height: 210,
         units: 'mm',
+    },
+    documentProperties: {
+    	title: 'Title',
+    	subject: 'Subject',
+    	author: 'meetup-utils',
+    	keywords: 'kw1, kw2',
+    	creator: 'meetup-utils'
     }
 }
 

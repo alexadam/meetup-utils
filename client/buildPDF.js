@@ -56,6 +56,7 @@ const addText = (doc, textData, posterData) => {
     doc.setFont(textData.graphic.fontFamily);
     doc.setFontSize(textData.graphic.fontSize);
 
+    // pdf.textAlign("text", {align: "center"}, x, y);
     let offsetX = textData.graphic.x
     if (textData.graphic.centerHorizontal || textData.graphic.centerText) {
         let textWidth = doc.getStringUnitWidth(splitText[0]) * doc.internal.getFontSize() / doc.internal.scaleFactor;
@@ -116,10 +117,16 @@ const addQRCode = (doc, qrData, posterData) => {
 function prepareDoc(pdfData, onDocReady) {
     let posterData = pdfData.posterData
     let doc = createPDFDoc(posterData.orientation, posterData.format, posterData.width, posterData.height)
+
+    doc.setProperties(pdfData.documentProperties);
+
     let allPromises = []
 
     // first add the images & remote data
     for (let item of pdfData.meetupData) {
+        if (!item.include) {
+            continue
+        }
         if (item.graphic.type === 'image') {
             allPromises.push(addImage(doc, item, pdfData.posterData))
         }
@@ -127,6 +134,9 @@ function prepareDoc(pdfData, onDocReady) {
 
     Promise.all(allPromises).then(() => {
         for (let item of pdfData.meetupData) {
+            if (!item.include) {
+                continue
+            }
             if (item.graphic.type === 'text') {
                 addText(doc, item, pdfData.posterData)
             } else if (item.graphic.type === 'qr') {
