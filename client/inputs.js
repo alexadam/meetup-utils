@@ -1,5 +1,7 @@
 import React from 'react'
 
+// TODO add multiline text
+
 class TextInput extends React.Component {
     state = {
         data: this.props.data
@@ -28,6 +30,7 @@ class TextInput extends React.Component {
             <div className='mtu-input'>
                 <label className='mtu-input-label'><input type="checkbox" checked={this.state.data.include} onChange={this.onChecked}/>{this.props.data.label}</label>
                 <input className='mtu-input-component' type="text" placeholder={this.props.data.value} value={this.state.data.value} onChange={this.onNewText}/>
+                <textarea name="" id="" cols="30" rows="3" placeholder={this.props.data.value} value={this.state.data.value} onChange={this.onNewText}></textarea>
             </div>
         )
     }

@@ -12,7 +12,7 @@ export default class PDFPreview extends React.Component {
             return null
         }
         return (
-            <div>
+            <div className="PDFPreview">
                 <Document
                   file={this.props.data}
                   onLoadSuccess={this.onDocumentLoadSuccess}

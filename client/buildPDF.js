@@ -11,11 +11,11 @@ const  getTextWidth = (text, font) => {
     return metrics.width;
 }
 
-const createPDFDoc = (orientation, format, width, height) => {
+const createPDFDoc = (orientation, format, width, height, unit) => {
     return new jsPDF({
-      orientation: 'landscape',
-      unit: 'mm',
-      format: [297, 210]
+      orientation: orientation,
+      unit: unit,
+      format: format
     })
 }
 
@@ -48,22 +48,24 @@ const centerVertical = (posterData, childData) => {
 
 const addText = (doc, textData, posterData) => {
     let tmpText = textData.value
-    let splitText = doc.splitTextToSize(tmpText, textData.graphic.width);
+    let splitText = doc.splitTextToSize(tmpText, textData.graphic.width / textData.graphic.fontSize * 20); // FIXME
     // FIXME
     // let tmpFont = textData.graphic.fontWeight + ' ' +  textData.graphic.fontSize + 'px ' + textData.graphic.fontFamily
     // let smnSize = getTextWidth(splitText[0], tmpFont)
 
     doc.setFont(textData.graphic.fontFamily);
     doc.setFontSize(textData.graphic.fontSize);
+    doc.setFontStyle(textData.graphic.fontStyle);
 
     // pdf.textAlign("text", {align: "center"}, x, y);
     let offsetX = textData.graphic.x
     if (textData.graphic.centerHorizontal || textData.graphic.centerText) {
         let textWidth = doc.getStringUnitWidth(splitText[0]) * doc.internal.getFontSize() / doc.internal.scaleFactor;
-        offsetX = centerHorizontal(posterData, textWidth)
+        offsetX += center(textData.graphic.width, textWidth)
+        // offsetX += centerHorizontal(posterData, textWidth)
     }
 
-    doc.text(splitText, offsetX, textData.graphic.y);
+    doc.text(splitText, offsetX, textData.graphic.y, center);
 }
 
 const getImageDataURL = (imgSrc, callback) => {
@@ -92,8 +94,6 @@ const addImage = (doc, imageData, posterData) => {
                     imageData.graphic.width,
                     imageData.graphic.height);
 
-                    console.log('resolve');
-
                 resolve()
         } )
     })
@@ -114,9 +114,24 @@ const addQRCode = (doc, qrData, posterData) => {
         qrData.graphic.height);
 }
 
+const addSVG = (doc, svgData, posterData) => {
+    let canvasElem = document.createElement('canvas')
+    canvg(canvasElem, svgData.value);
+    let imgData = canvasElem.toDataURL("image/png");
+
+    let offsetX = centerHorizontal(posterData, svgData)
+    let offsetY = centerVertical(posterData, svgData)
+
+    doc.addImage(imgData, 'PNG',
+        offsetX,
+        offsetY,
+        svgData.graphic.width,
+        svgData.graphic.height);
+}
+
 function prepareDoc(pdfData, onDocReady) {
     let posterData = pdfData.posterData
-    let doc = createPDFDoc(posterData.orientation, posterData.format, posterData.width, posterData.height)
+    let doc = createPDFDoc(posterData.orientation, posterData.format, posterData.width, posterData.height, posterData.unit)
 
     doc.setProperties(pdfData.documentProperties);
 
@@ -141,6 +156,8 @@ function prepareDoc(pdfData, onDocReady) {
                 addText(doc, item, pdfData.posterData)
             } else if (item.graphic.type === 'qr') {
                 addQRCode(doc, item, pdfData.posterData)
+            } else if (item.graphic.type === 'svg') {
+                addSVG(doc, item, pdfData.posterData)
             }
         }
         onDocReady(doc)

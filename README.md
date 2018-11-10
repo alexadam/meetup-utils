@@ -15,5 +15,6 @@ Credits
 
 Meetup.com trademark: https://help.meetup.com/hc/en-us/articles/360001655932-Meetup-Trademark-Guidelines
 jsPDF, for generating the pdf file: https://github.com/MrRio/jsPDF
+React-PDF, for pdf preview: https://github.com/wojtekmaj/react-pdf#readme
 canvg, for adding SVG to pdf: https://github.com/canvg/canvg
 qrious, for QR codes: https://github.com/neocotic/qrious
