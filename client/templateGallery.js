@@ -880,6 +880,200 @@ const miscInfoWiFiLarge = {
     }
 }
 
+const addressInfo = {
+    meetupData: [
+        {
+            label: 'Meetup Logo',
+            type: 'image',
+            value: '/client/assets/meetup-logo-300.png',
+            id: 'meetupLogo',
+            include: true,
+            graphic: {
+                type: 'image',
+                x: 30,
+                y: 20,
+                width: 75,
+                height: 25,
+                centerHorizontal: false,
+                centerVertical: false,
+            }
+        },
+        {
+            label: 'Meetup Name',
+            type: 'text',
+            value: 'Meetup Name',
+            id: 'meetupName',
+            include: true,
+            graphic: {
+                type: 'text',
+                x: 150,
+                y: 35,
+                width: 150,
+                height: 35,
+                wrapText: true,
+                fontSize: 40,
+                fontFamily: 'helvetica',
+                fontStyle: 'bold',
+                centerText: true
+            }
+        },
+        {
+            label: 'Event Name',
+            type: 'text',
+            value: 'Event Name',
+            id: 'eventName',
+            include: true,
+            graphic: {
+                type: 'text',
+                x: 20,
+                y: 80,
+                width: 125,
+                height: 35,
+                wrapText: true,
+                fontSize: 30,
+                fontFamily: 'helvetica',
+                fontStyle: 'normal',
+                centerText: true
+            }
+        },
+        {
+            label: 'QR Code',
+            type: 'text',
+            value: 'https://www.meetup.com',
+            id: 'meetupQR',
+            include: true,
+            graphic: {
+                type: 'qr',
+                x: 55,
+                y: 160,
+                width: 30,
+                height: 30,
+            }
+        },
+        {
+            label: 'Event Location',
+            type: 'text',
+            value: 'Address',
+            id: 'eventLocation',
+            include: true,
+            graphic: {
+                type: 'text',
+                x: 150,
+                y: 80,
+                width: 125,
+                height: 35,
+                wrapText: true,
+                fontSize: 30,
+                fontFamily: 'helvetica',
+                fontStyle: 'normal',
+                centerText: true
+            }
+        },
+        {
+            label: 'Map QR Code',
+            type: 'text',
+            value: 'https://www.openstreetmap.org',
+            id: 'meetupMapQR',
+            include: true,
+            graphic: {
+                type: 'qr',
+                x: 200,
+                y: 160,
+                width: 30,
+                height: 30,
+            }
+        },
+    ],
+    posterData: {
+        orientation: 'landscape',
+        format: 'a4',
+        width: 297,
+        height: 210,
+        units: 'mm',
+    },
+    documentProperties: {
+    	title: 'Title',
+    	subject: 'Subject',
+    	author: 'meetup-utils',
+    	keywords: 'kw1, kw2',
+    	creator: 'meetup-utils'
+    }
+}
+
+const nameCards = {
+    meetupData: [
+        {
+            label: 'Meetup Logo',
+            type: 'image',
+            value: '/client/assets/meetup-logo-300.png',
+            id: 'meetupLogo',
+            include: true,
+            graphic: {
+                type: 'image',
+                x: 10,
+                y: 10,
+                width: 35,
+                height: 12,
+                centerHorizontal: false,
+                centerVertical: false,
+            }
+        },
+        {
+            label: 'Participant Name',
+            type: 'text',
+            value: 'Participant Name',
+            id: 'participantName',
+            include: true,
+            graphic: {
+                type: 'text',
+                x: 10,
+                y: 35,
+                width: 70,
+                height: 35,
+                wrapText: true,
+                fontSize: 20,
+                fontFamily: 'helvetica',
+                fontStyle: 'bold',
+                centerText: false
+            }
+        },
+        {
+            label: 'Event Name',
+            type: 'text',
+            value: 'Event Name',
+            id: 'eventName',
+            include: true,
+            graphic: {
+                type: 'text',
+                x: 10,
+                y: 50,
+                width: 70,
+                height: 35,
+                wrapText: true,
+                fontSize: 20,
+                fontFamily: 'helvetica',
+                fontStyle: 'normal',
+                centerText: false
+            }
+        },
+    ],
+    posterData: {
+        orientation: 'landscape',
+        format: 'a4',
+        width: 297,
+        height: 210,
+        units: 'mm',
+        repeat: [3, 3]
+    },
+    documentProperties: {
+    	title: 'Title',
+    	subject: 'Subject',
+    	author: 'meetup-utils',
+    	keywords: 'kw1, kw2',
+    	creator: 'meetup-utils'
+    }
+}
+
 class TemplatePreview extends React.Component {
 
     onClick = () => {
@@ -903,11 +1097,15 @@ export default class TemplateGallery extends React.Component {
 
     render = () => {
 
+        // <div className="TemplateGalleryRow">
+        //     <TemplatePreview onTemplateSelected={this.onTemplateSelected} templateData={nameCards} />
+        // </div>
         return (
             <div className="TemplateGallery">
                 <div className="TemplateGalleryRow">
                     <TemplatePreview onTemplateSelected={this.onTemplateSelected} templateData={generalInfo} />
                     <TemplatePreview onTemplateSelected={this.onTemplateSelected} templateData={generalInfo2} />
+                    <TemplatePreview onTemplateSelected={this.onTemplateSelected} templateData={addressInfo} />
                 </div>
                 <div className="TemplateGalleryRow">
                     <TemplatePreview onTemplateSelected={this.onTemplateSelected} templateData={directionsRight} />

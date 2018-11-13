@@ -48,7 +48,17 @@ const centerVertical = (posterData, childData) => {
 
 const addText = (doc, textData, posterData) => {
     let tmpText = textData.value
-    let splitText = doc.splitTextToSize(tmpText, textData.graphic.width / textData.graphic.fontSize * 20); // FIXME
+    // let splitText = doc.splitTextToSize(tmpText, textData.graphic.width / textData.graphic.fontSize * 20); // FIXME
+    let splitText = doc.splitTextToSize(tmpText, textData.graphic.width); // FIXME
+
+    let maxVal = 0
+    let maxIndex = 0
+    for (let i = 0; i < splitText.length; i++) {
+        if (splitText[i].length > maxVal) {
+            maxVal = splitText[i].length
+            maxIndex = i
+        }
+    }
     // FIXME
     // let tmpFont = textData.graphic.fontWeight + ' ' +  textData.graphic.fontSize + 'px ' + textData.graphic.fontFamily
     // let smnSize = getTextWidth(splitText[0], tmpFont)
@@ -60,8 +70,12 @@ const addText = (doc, textData, posterData) => {
     // pdf.textAlign("text", {align: "center"}, x, y);
     let offsetX = textData.graphic.x
     if (textData.graphic.centerHorizontal || textData.graphic.centerText) {
-        let textWidth = doc.getStringUnitWidth(splitText[0]) * doc.internal.getFontSize() / doc.internal.scaleFactor;
-        offsetX += center(textData.graphic.width, textWidth)
+        let textWidth = doc.getStringUnitWidth(splitText[maxIndex]) * doc.internal.getFontSize() / doc.internal.scaleFactor;
+        console.log(textWidth, textData.graphic.width, 'yuyuyuyu');
+        if (textWidth <= textData.graphic.width) {
+            offsetX = offsetX + (textData.graphic.width - textWidth )/ 2
+        }
+        // offsetX += center(textData.graphic.width, textWidth)
         // offsetX += centerHorizontal(posterData, textWidth)
     }
 
@@ -134,6 +148,30 @@ function prepareDoc(pdfData, onDocReady) {
     let doc = createPDFDoc(posterData.orientation, posterData.format, posterData.width, posterData.height, posterData.unit)
 
     doc.setProperties(pdfData.documentProperties);
+
+    // for cards
+    // if (pdfData.posterData.repeat) {
+    //     let repeatX = pdfData.posterData.repeat[0]
+    //     let repeatXDim = pdfData.posterData.width / pdfData.posterData.repeat[0]
+    //     let repeatY = pdfData.posterData.repeat[1]
+    //     let repeatYDim = pdfData.posterData.height / pdfData.posterData.repeat[1]
+    //     let tmpNewData = []
+    //     for (let item of pdfData.meetupData) {
+    //         for (let i = 0; i < repeatX; i++) {
+    //             for (let j = 0; j < repeatY; j++) {
+    //                 if (i === 0 && j === 0) { // firstElem
+    //                     continue
+    //                 }
+    //                 let tmpElem = JSON.parse(JSON.stringify(item))
+    //                 tmpElem.graphic.x += repeatXDim * i
+    //                 tmpElem.graphic.y += repeatYDim * j
+    //                 tmpElem.id = item.id + i + '-' + j + Math.floor(Math.random()*100000)
+    //                 tmpNewData.push(tmpElem)
+    //             }
+    //         }
+    //     }
+    //     pdfData.meetupData = pdfData.meetupData.concat(tmpNewData)
+    // }
 
     let allPromises = []
 

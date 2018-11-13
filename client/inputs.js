@@ -131,6 +131,15 @@ export default class Inputs extends React.Component {
         }
     }
 
+    static getDerivedStateFromProps = (props, state) => {
+        if (props.data !== state.data) {
+          return {
+            data: props.data
+          }
+        }
+        return null;
+    }
+
 
     render = () => {
 
