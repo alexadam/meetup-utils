@@ -30,7 +30,39 @@ class TextInput extends React.Component {
             <div className='mtu-input'>
                 <label className='mtu-input-label'><input type="checkbox" checked={this.state.data.include} onChange={this.onChecked}/>{this.props.data.label}</label>
                 <input className='mtu-input-component' type="text" placeholder={this.props.data.value} value={this.state.data.value} onChange={this.onNewText}/>
-                <textarea name="" id="" cols="30" rows="3" placeholder={this.props.data.value} value={this.state.data.value} onChange={this.onNewText}></textarea>
+            </div>
+        )
+    }
+}
+
+class MultiLIneTextInput extends React.Component {
+    state = {
+        data: this.props.data
+    }
+    onNewText = (e) => {
+        let newValue = e.target.value
+        let tmpData = {...this.state.data, value: newValue}
+        this.setState({
+            data: tmpData
+        }, () => {
+            this.props.onDataChange(tmpData)
+        })
+    }
+    onChecked = (e) => {
+        // TODO disable input if not included
+        let newValue = !this.state.data.include
+        let tmpData = {...this.state.data, include: newValue}
+        this.setState({
+            data: tmpData
+        }, () => {
+            this.props.onDataChange(tmpData)
+        })
+    }
+    render = () => {
+        return (
+            <div className='mtu-input'>
+                <label className='mtu-input-label'><input type="checkbox" checked={this.state.data.include} onChange={this.onChecked}/>{this.props.data.label}</label>
+                <textarea className='mtu-input-component' cols="30" rows="3" placeholder={this.props.data.value} value={this.state.data.value} onChange={this.onNewText}></textarea>
             </div>
         )
     }
@@ -132,12 +164,13 @@ export default class Inputs extends React.Component {
     }
 
     static getDerivedStateFromProps = (props, state) => {
-        if (props.data !== state.data) {
+        // FIXME
+        // if (props.data !== state.data) {
           return {
             data: props.data
           }
-        }
-        return null;
+        // }
+        // return null;
     }
 
 
@@ -145,7 +178,9 @@ export default class Inputs extends React.Component {
 
         let inputComponents = this.state.data.meetupData.map((dataElem)=>{
             if (dataElem.type === 'text') {
-                return <TextInput data={dataElem} onDataChange={this.onDataChange} key={dataElem.id}/>
+                return <TextInput data={dataElem} onDataChange={this.onDataChange} key={dataElem.id + this.state.data.id}/>
+            } else if (dataElem.type === 'multiline-text') {
+                return <MultiLIneTextInput data={dataElem} onDataChange={this.onDataChange} key={dataElem.id + this.state.data.id}/>
             }
         })
 

@@ -71,7 +71,6 @@ const addText = (doc, textData, posterData) => {
     let offsetX = textData.graphic.x
     if (textData.graphic.centerHorizontal || textData.graphic.centerText) {
         let textWidth = doc.getStringUnitWidth(splitText[maxIndex]) * doc.internal.getFontSize() / doc.internal.scaleFactor;
-        console.log(textWidth, textData.graphic.width, 'yuyuyuyu');
         if (textWidth <= textData.graphic.width) {
             offsetX = offsetX + (textData.graphic.width - textWidth )/ 2
         }

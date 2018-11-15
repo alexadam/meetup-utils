@@ -32,15 +32,15 @@ const generalInfo = {
         },
         {
             label: 'Meetup Name',
-            type: 'text',
+            type: 'multiline-text',
             value: 'Meetup Name',
             id: 'meetupName',
             include: true,
             graphic: {
                 type: 'text',
                 x: 10,
-                y: 90,
-                width: 100,
+                y: 110,
+                width: 270,
                 height: 35,
                 wrapText: true,
                 fontSize: 70,
@@ -58,7 +58,7 @@ const generalInfo = {
             graphic: {
                 type: 'qr',
                 x: 135,
-                y: 140,
+                y: 150,
                 width: 30,
                 height: 30,
             }
@@ -73,7 +73,7 @@ const generalInfo = {
     },
     documentProperties: {
     	title: 'Title',
-    	subject: 'Subject',
+    	subject: 'meetup info',
     	author: 'meetup-utils',
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
@@ -100,15 +100,15 @@ const generalInfo2 = {
         },
         {
             label: 'Meetup Name',
-            type: 'text',
+            type: 'multiline-text',
             value: 'Meetup Name',
             id: 'meetupName',
             include: true,
             graphic: {
                 type: 'text',
                 x: 10,
-                y: 90,
-                width: 100,
+                y: 100,
+                width: 270,
                 height: 35,
                 wrapText: true,
                 fontSize: 70,
@@ -119,15 +119,15 @@ const generalInfo2 = {
         },
         {
             label: 'Event Name',
-            type: 'text',
+            type: 'multiline-text',
             value: 'Event Name',
             id: 'eventName',
             include: true,
             graphic: {
                 type: 'text',
                 x: 10,
-                y: 110,
-                width: 200,
+                y: 135,
+                width: 270,
                 height: 35,
                 wrapText: true,
                 fontSize: 30,
@@ -145,7 +145,7 @@ const generalInfo2 = {
             graphic: {
                 type: 'qr',
                 x: 135,
-                y: 140,
+                y: 155,
                 width: 30,
                 height: 30,
             }
@@ -160,7 +160,7 @@ const generalInfo2 = {
     },
     documentProperties: {
     	title: 'Title',
-    	subject: 'Subject',
+    	subject: 'meetup and event info',
     	author: 'meetup-utils',
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
@@ -187,7 +187,7 @@ const directionsRight = {
         },
         {
             label: 'Meetup Name',
-            type: 'text',
+            type: 'multiline-text',
             value: 'Meetup Name',
             id: 'meetupName',
             include: true,
@@ -233,7 +233,7 @@ const directionsRight = {
         },
         {
             label: 'Arrow Text',
-            type: 'text',
+            type: 'multiline-text',
             value: '',
             id: 'arrowText',
             include: false,
@@ -260,7 +260,7 @@ const directionsRight = {
     },
     documentProperties: {
     	title: 'Title',
-    	subject: 'Subject',
+    	subject: 'directions right',
     	author: 'meetup-utils',
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
@@ -287,7 +287,7 @@ const directionsLeft = {
         },
         {
             label: 'Meetup Name',
-            type: 'text',
+            type: 'multiline-text',
             value: 'Meetup Name',
             id: 'meetupName',
             include: true,
@@ -333,7 +333,7 @@ const directionsLeft = {
         },
         {
             label: 'Arrow Text',
-            type: 'text',
+            type: 'multiline-text',
             value: '',
             id: 'arrowText',
             include: false,
@@ -360,7 +360,7 @@ const directionsLeft = {
     },
     documentProperties: {
     	title: 'Title',
-    	subject: 'Subject',
+    	subject: 'directions left',
     	author: 'meetup-utils',
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
@@ -387,7 +387,7 @@ const directionsTop = {
         },
         {
             label: 'Meetup Name',
-            type: 'text',
+            type: 'multiline-text',
             value: 'Meetup Name',
             id: 'meetupName',
             include: true,
@@ -433,7 +433,7 @@ const directionsTop = {
         },
         {
             label: 'Arrow Text',
-            type: 'text',
+            type: 'multiline-text',
             value: '',
             id: 'arrowText',
             include: false,
@@ -460,7 +460,7 @@ const directionsTop = {
     },
     documentProperties: {
     	title: 'Title',
-    	subject: 'Subject',
+    	subject: 'directions top',
     	author: 'meetup-utils',
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
@@ -487,7 +487,7 @@ const directionsDown = {
         },
         {
             label: 'Meetup Name',
-            type: 'text',
+            type: 'multiline-text',
             value: 'Meetup Name',
             id: 'meetupName',
             include: true,
@@ -533,7 +533,7 @@ const directionsDown = {
         },
         {
             label: 'Arrow Text',
-            type: 'text',
+            type: 'multiline-text',
             value: '',
             id: 'arrowText',
             include: false,
@@ -560,7 +560,7 @@ const directionsDown = {
     },
     documentProperties: {
     	title: 'Title',
-    	subject: 'Subject',
+    	subject: 'directions down',
     	author: 'meetup-utils',
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
@@ -588,7 +588,7 @@ const miscInfoWiFi = {
         },
         {
             label: 'Meetup Name',
-            type: 'text',
+            type: 'multiline-text',
             value: 'Meetup Name',
             id: 'meetupName',
             include: true,
@@ -643,7 +643,7 @@ const miscInfoWiFi = {
             type: 'text',
             value: '',
             id: 'value1',
-            include: false,
+            include: true,
             graphic: {
                 type: 'text',
                 x: 160,
@@ -705,7 +705,7 @@ const miscInfoWiFi = {
     },
     documentProperties: {
     	title: 'Title',
-    	subject: 'Subject',
+    	subject: 'info wifi',
     	author: 'meetup-utils',
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
@@ -732,7 +732,7 @@ const miscInfoWiFiLarge = {
         },
         {
             label: 'Meetup Name',
-            type: 'text',
+            type: 'multiline-text',
             value: 'Meetup Name',
             id: 'meetupName',
             include: true,
@@ -846,7 +846,7 @@ const miscInfoWiFiLarge = {
         },
         {
             label: 'Value',
-            type: 'text',
+            type: 'multiline-text',
             value: '',
             id: 'value3',
             include: true,
@@ -873,7 +873,7 @@ const miscInfoWiFiLarge = {
     },
     documentProperties: {
     	title: 'Title',
-    	subject: 'Subject',
+    	subject: 'info wifi large',
     	author: 'meetup-utils',
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
@@ -900,7 +900,7 @@ const addressInfo = {
         },
         {
             label: 'Meetup Name',
-            type: 'text',
+            type: 'multiline-text',
             value: 'Meetup Name',
             id: 'meetupName',
             include: true,
@@ -919,13 +919,13 @@ const addressInfo = {
         },
         {
             label: 'Event Name',
-            type: 'text',
+            type: 'multiline-text',
             value: 'Event Name',
             id: 'eventName',
             include: true,
             graphic: {
                 type: 'text',
-                x: 20,
+                x: 10,
                 y: 80,
                 width: 125,
                 height: 35,
@@ -952,7 +952,7 @@ const addressInfo = {
         },
         {
             label: 'Event Location',
-            type: 'text',
+            type: 'multiline-text',
             value: 'Address',
             id: 'eventLocation',
             include: true,
@@ -977,7 +977,7 @@ const addressInfo = {
             include: true,
             graphic: {
                 type: 'qr',
-                x: 200,
+                x: 210,
                 y: 160,
                 width: 30,
                 height: 30,
@@ -993,7 +993,7 @@ const addressInfo = {
     },
     documentProperties: {
     	title: 'Title',
-    	subject: 'Subject',
+    	subject: 'meetup address',
     	author: 'meetup-utils',
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
@@ -1092,6 +1092,7 @@ class TemplatePreview extends React.Component {
 export default class TemplateGallery extends React.Component {
 
     onTemplateSelected = (templateData) => {
+        templateData.id = Math.floor(Math.random() * 1000000)
         this.props.onTemplateSelected(templateData)
     }
 
