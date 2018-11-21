@@ -19,19 +19,21 @@ html, body {
 }
 
 .mtu-canvas-container {
-    width: 100%; height: 100%; display: flex; flex-flow: column; justify-content: center; align-items: center;
+    // width: 100%; height: 100%;
+    display: flex; flex-flow: column; justify-content: center; align-items: center;
     padding: 20px;
     background-color: gray;
 }
 
 .mtu-canvas {
-    size: 21cm 29.7cm;
-    height: 21cm;
-    width : 29.7cm;
+    // size: 21cm 29.7cm;
+    // height: 21cm;
+    // width : 29.7cm;
     // padding: 100px;
-    background-color: white;
+    // background-color: white;
     position: relative;
-    box-sizing: border-box;
+    // box-sizing: border-box;
+    // transform: scale(0.5);
 }
 .mtu-canvas-row {
     display: flex; flex-flow: row; width: 100%;
@@ -164,12 +166,14 @@ html, body {
         flex-flow: row;
         justify-content: center;
         align-items: center;
+        overflow-x: auto;
     }
 
     .TemplateThumb {
         background-color: white;
         border: solid 1px rgba(0,0,0,0.21);
         margin: 20px;
+        display: flex; flex-flow: column;
     }
     .TemplateThumb:hover {
         box-shadow: 0 0 0.5cm rgba(0,0,0,0.25);
@@ -185,5 +189,19 @@ html, body {
         min-height: 297px;
         width: 210px;
         min-width: 210px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .TemplateGallery {
+        width: 100%;
+        justify-content: flex-start;
+        align-content: flex-start;
+
+        .TemplateGalleryRow {
+            width: auto;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
     }
 }

@@ -46,12 +46,19 @@ class App extends React.Component {
     }
 
     onTemplateSelected = (selectedTemplate) => {
-        getPdfUrl(selectedTemplate, (newPdf) => {
+        if (!selectedTemplate) {
             this.setState({
-                dataModel: selectedTemplate,
-                pdf: newPdf
+                dataModel: null,
+                pdf: null
             })
-        })
+        } else {
+            getPdfUrl(selectedTemplate, (newPdf) => {
+                this.setState({
+                    dataModel: selectedTemplate,
+                    pdf: newPdf
+                })
+            })
+        }
     }
 
     render = () => {

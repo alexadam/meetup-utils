@@ -64,22 +64,27 @@ class TextElement extends React.Component {
 
     render = () => {
 
-        let unit = 'mm'
+        let unit = '%'
         let gr = this.state.graphic
+        let ww = gr.width / this.props.posterData.width * 100
+        ww = ww > 100 ? 100 : ww
 
         let style = {
             // width: gr.width + unit,
-            width: '100%',
-            height: gr.height + unit,
-            lineHeight: gr.height + unit,
-            verticalAlign: 'middle',
-            top: gr.y + unit,
-            left: gr.x + unit,
-            fontSize: gr.fontSize + 'px',
+            width: (ww + 10) + unit,
+            height: (gr.height / this.props.posterData.height * 100 ) + unit,
+            // lineHeight: gr.height + unit,
+            // verticalAlign: 'middle',
+            top: (gr.y / this.props.posterData.height * 100) + unit,
+            left: (gr.x / this.props.posterData.width * 100)  + unit,
+            // top: (gr.y ) + unit,
+            // left: (gr.x)  + unit,
+            fontSize: (gr.fontSize / 3) + 'px',
             fontFamily: gr.fontFamily,
-            textAlign: 'center',
+            textAlign: gr.centerText ? 'center' : 'none',
             padding: 0,
             margin: 0,
+            // transform: 'scale(0.5)',
         }
 
         console.log(style);
@@ -129,21 +134,39 @@ export default class Canvas extends React.Component {
 
         let inputComponents = this.state.data.meetupData.map((dataElem)=>{
             if (dataElem.graphic.type === 'text') {
-                return <TextElement data={dataElem} onDataChange={this.onDataChange} key={dataElem.id}/>
+                return <TextElement data={dataElem} posterData={this.state.data.posterData} onDataChange={this.onDataChange} key={dataElem.id}/>
             } else {
                 return null
             }
         })
 
-        console.log(inputComponents);
+        let unit = 'mm'
+        let gr = this.state.data.posterData
+
+        let style = {
+            // width: gr.width + unit,
+            width: '100%',
+            // height: gr.height + unit,
+            height: '100%',
+            padding: 0,
+            margin: 0,
+            position: 'relative'
+            // transform: 'scale(0.25)',
+        }
 
         return (
-            <div className='mtu-canvas-container'>
-                <div className='mtu-canvas'>
-                    {inputComponents}
-                </div>
+            <div className="mtu-canvas" style={style}>
+                {inputComponents}
             </div>
         )
+
+        // return (
+        //     <div className='mtu-canvas-container'>
+        //         <div className='mtu-canvas'>
+        //
+        //         </div>
+        //     </div>
+        // )
     }
 }
 // <ImageElement imgSrc={Logos.MeetupPNGBase64Logo} />

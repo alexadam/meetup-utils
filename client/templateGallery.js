@@ -1091,12 +1091,39 @@ class TemplatePreview extends React.Component {
 
 export default class TemplateGallery extends React.Component {
 
+    state = {
+        templateSelected: null
+    }
+
     onTemplateSelected = (templateData) => {
         templateData.id = Math.floor(Math.random() * 1000000)
-        this.props.onTemplateSelected(templateData)
+        this.setState({
+            templateSelected: templateData
+        }, () => {
+            this.props.onTemplateSelected(templateData)
+        })
+
+    }
+
+    selectOtherTemplate = () => {
+        this.setState({
+            templateSelected: null
+        }, () => {
+            this.props.onTemplateSelected(null)
+        })
     }
 
     render = () => {
+
+        if (this.state.templateSelected) {
+            return (
+                <div className="TemplateGallery">
+                    <div className="TemplateGalleryRow">
+                        <button onClick={this.selectOtherTemplate}>Select a different template</button>
+                    </div>
+                </div>
+            )
+        }
 
         // <div className="TemplateGalleryRow">
         //     <TemplatePreview onTemplateSelected={this.onTemplateSelected} templateData={nameCards} />
