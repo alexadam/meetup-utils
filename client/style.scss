@@ -1,9 +1,19 @@
 
 html, body {
     height: 100%; width: 100%; padding: 0; margin: 0;
-}
+    // background-color: #EEE1C9;
+    background: #DEDBD1;
+    background: #DFE0DB;
+    // background-color: #D7DDD8;
 
-* {box-sizing: border-box;}
+    // z-index: -2;
+
+
+//     background: #457fca;  /* fallback for old browsers */
+// background: -webkit-linear-gradient(to right, #5691c8, #457fca);  /* Chrome 10-25, Safari 5.1-6 */
+// background: linear-gradient(to right, #5691c8, #457fca); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
 
 #app {
     height: 100%; width: 100%; padding: 0; margin: 0;
@@ -15,7 +25,6 @@ html, body {
 }
 .app-container-row {
     display: flex; flex-flow: row; width: 100%; //height: 100%;
-    background-color: #EEE1C9;
 }
 
 .mtu-canvas-container {
@@ -25,22 +34,41 @@ html, body {
     background-color: gray;
 }
 
-.mtu-canvas {
-    // size: 21cm 29.7cm;
-    // height: 21cm;
-    // width : 29.7cm;
-    // padding: 100px;
-    // background-color: white;
-    position: relative;
-    // box-sizing: border-box;
-    // transform: scale(0.5);
+
+.mtu-header {
+    width: 100%;
+    display: flex; flex-flow: row;
+    justify-content: center;
 }
-.mtu-canvas-row {
-    display: flex; flex-flow: row; width: 100%;
+
+.mtu-title {
+    font-family: sans-serif;
+    font-size: 40px;
+    margin: 20px;
 }
-.mtu-canvas-element {
-    position: absolute;
+
+.mtu-text {
+    font-family: sans-serif;
+    font-size: 20px;
+    margin: 20px;
 }
+
+// .mtu-canvas {
+//     // size: 21cm 29.7cm;
+//     // height: 21cm;
+//     // width : 29.7cm;
+//     // padding: 100px;
+//     // background-color: white;
+//     position: relative;
+//     // box-sizing: border-box;
+//     // transform: scale(0.5);
+// }
+// .mtu-canvas-row {
+//     display: flex; flex-flow: row; width: 100%;
+// }
+// .mtu-canvas-element {
+//     position: absolute;
+// }
 
 .left-menu {
     width: 300px;
@@ -98,74 +126,10 @@ html, body {
     overflow: auto;
 }
 
-.effect2
-{
-  position: relative;
-}
-.effect2:before, .effect2:after
-{
-  z-index: -1;
-  position: absolute;
-  content: "";
-  bottom: 15px;
-  left: 10px;
-  width: 50%;
-  top: 80%;
-  max-width:300px;
-  background: #777;
-  -webkit-box-shadow: 0 15px 10px #777;
-  -moz-box-shadow: 0 15px 10px #777;
-  box-shadow: 0 15px 10px #777;
-  -webkit-transform: rotate(-3deg);
-  -moz-transform: rotate(-3deg);
-  -o-transform: rotate(-3deg);
-  -ms-transform: rotate(-3deg);
-  transform: rotate(-3deg);
-}
-.effect2:after
-{
-  -webkit-transform: rotate(3deg);
-  -moz-transform: rotate(3deg);
-  -o-transform: rotate(3deg);
-  -ms-transform: rotate(3deg);
-  transform: rotate(3deg);
-  right: 10px;
-  left: auto;
-}
 
-
-
-.effect6
+.effect
 {
-    position:relative;
-    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-}
-.effect6:before, .effect6:after
-{
-    content:"";
-    position:absolute;
-    z-index:-1;
-    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
-    -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
-    box-shadow:0 0 20px rgba(0,0,0,0.8);
-    top:50%;
-    bottom:0;
-    left:10px;
-    right:10px;
-    -moz-border-radius:100px / 10px;
-    border-radius:100px / 10px;
-}
-.effect6:after
-{
-    right:10px;
-    left:auto;
-    -webkit-transform:skew(8deg) rotate(3deg);
-       -moz-transform:skew(8deg) rotate(3deg);
-        -ms-transform:skew(8deg) rotate(3deg);
-         -o-transform:skew(8deg) rotate(3deg);
-            transform:skew(8deg) rotate(3deg);
+  box-shadow: 0 8px 6px -6px rgba(0,0,0,0.3);
 }
 
 
@@ -178,9 +142,13 @@ html, body {
     cursor: pointer;
     padding: 5px;
     margin-bottom: 10px;
+    background-color: rgba(255, 200,0 , 0.81);
+    border: solid 1px rgba(0,0,0,0.13);
+    box-shadow: 0 8px 6px -6px rgba(0,0,0,0.3);
+    border-radius: 3px;
 }
 .SpecialButton:hover {
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0,0,0,0);
 }
 
 #pdfPreviewButton {
@@ -215,6 +183,8 @@ html, body {
         border: solid 1px rgba(0,0,0,0.21);
         margin: 20px;
         display: flex; flex-flow: column;
+        cursor: pointer;
+        // box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
     }
     .TemplateThumb:hover {
         box-shadow: 0 0 0.5cm rgba(0,0,0,0.25);

@@ -1083,7 +1083,7 @@ class TemplatePreview extends React.Component {
     render = () => {
         return (
             <div className="TemplatePreview" onClick={this.onClick}>
-                <div className="TemplateThumb landscape effect2"></div>
+                <div className="TemplateThumb landscape effect"></div>
             </div>
         )
     }
@@ -1130,6 +1130,9 @@ export default class TemplateGallery extends React.Component {
         // </div>
         return (
             <div className="TemplateGallery">
+                <div className="mtu-header">
+                    <div className="mtu-text">Step 1. Select a template:</div>
+                </div>
                 <div className="TemplateGalleryRow">
                     <TemplatePreview onTemplateSelected={this.onTemplateSelected} templateData={generalInfo} />
                     <TemplatePreview onTemplateSelected={this.onTemplateSelected} templateData={generalInfo2} />

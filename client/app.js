@@ -91,7 +91,10 @@ class App extends React.Component {
 
         return (
             <div id="appContainer">
-                <h1>Meetup Utils</h1>
+                <div className="mtu-header">
+                    <div className="mtu-title">Meetup Utils</div>
+                    <div className="mtu-text">Create ready to print posters and indicators for meetups</div>
+                </div>
                 <div className="app-container-row">
                     <TemplateGallery onTemplateSelected={this.onTemplateSelected} />
                 </div>
