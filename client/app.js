@@ -12,28 +12,29 @@ import PDFPreview from './pdfPreview'
 
 import {getPdfUrl, savePdf} from './buildPDF'
 
-const dataModel = {
-    meetupData: {
-        meetupName: 'Research in Cluj',
-        eventName: 'Hacktoberfest @ Research in Cluj',
-        eventLink: 'https://www.meetup.com/research-in-cluj/events/255360569/',
-        date: '16 oct 2018',
-        startHour: '18:30',
-        endHour: '20:30',
-        locationName: 'Evozon',
-        locationAddress: 'Calea Motilor 62',
-    },
-    posterData: {
-        orientation: 'landscape'
-    }
+class PopUp extends React.Component {
 
+    render = () => {
+        if (!this.props.isVisible) {
+            return null
+        }
+        return (
+            <div id="mtu-PopUp">
+                <div className="modal">
+                    <button onClick={()=>this.props.onClose()}>X Close</button>
+                    {this.props.children}
+                </div>
+            </div>
+        )
+    }
 }
 
 class App extends React.Component {
 
     state = {
         pdf: null,
-        dataModel: null
+        dataModel: null,
+        popupVisible: false
     }
 
     onNewData = (newData) => {
@@ -61,14 +62,29 @@ class App extends React.Component {
         }
     }
 
+    togglePreviewPdf = () => {
+        this.setState({
+            popupVisible: !this.state.popupVisible
+        })
+    }
+
     render = () => {
 
         let pdfSettings = null;
         if (this.state.dataModel) {
             pdfSettings = (
                 <div className="app-container-row PosterSettings">
-                    <Inputs data={this.state.dataModel} onNewData={this.onNewData} />
+                    <div className="left-menu">
+                        <Inputs data={this.state.dataModel} onNewData={this.onNewData} />
+                        <div className="menu-buttons">
+                            <button id="pdfPreviewButton" className="SpecialButton" onClick={this.togglePreviewPdf}>Preview PDF...</button>
+                            <button className="SpecialButton" onClick={() => savePdf(this.state.dataModel)}>Save PDF...</button>
+                        </div>
+                    </div>
                     <PDFPreview data={this.state.pdf}/>
+                    <PopUp onClose={this.togglePreviewPdf} isVisible={this.state.popupVisible}>
+                        <PDFPreview data={this.state.pdf} inPopUp={true}/>
+                    </PopUp>
                 </div>
             )
         }
@@ -80,7 +96,6 @@ class App extends React.Component {
                     <TemplateGallery onTemplateSelected={this.onTemplateSelected} />
                 </div>
                 {pdfSettings}
-                <button onClick={() => savePdf(this.state.dataModel)}>Save PDF...</button>
             </div>);
     }
 }

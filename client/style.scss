@@ -42,9 +42,24 @@ html, body {
     position: absolute;
 }
 
-.mtu-input-container {
+.left-menu {
     width: 300px;
+    min-width: 300px;
     height: 100%;
+    display: flex;
+    flex-flow: column;
+
+    .menu-buttons {
+        display: flex;
+        flex-flow: column;
+        margin-top: 50px;
+        padding: 10px;
+    }
+}
+
+.mtu-input-container {
+    width: 100%;
+    // height: 100%;
     padding: 5px;
     display: flex; flex-flow: column;
 }
@@ -75,10 +90,13 @@ html, body {
     justify-content: center;
 }
 
-.PDFPreview {
-
+#PDFPreview {
+    width: 800px;
+    padding: 5px;
+    box-sizing: border-box;
+    // width: 100%;
+    overflow: auto;
 }
-
 
 .effect2
 {
@@ -151,9 +169,26 @@ html, body {
 }
 
 
+.SpecialButton {
+    font-size: 20px;
+    font-family: sans-serif;
+    background-color: rgba(0,0,0,0.2);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+.SpecialButton:hover {
+    background-color: rgba(0,0,0,0.3);
+}
+
+#pdfPreviewButton {
+    display: none;
+}
+
 .TemplateGallery {
     width: 100%;
-    // height: 100%;
     display: flex;
     flex-flow: column;
     justify-content: center;
@@ -167,6 +202,12 @@ html, body {
         justify-content: center;
         align-items: center;
         overflow-x: auto;
+    }
+
+    .TemplateGalleryRow-BackButton {
+        // justify-content: flex-start;
+        // align-items: flex-start;
+        padding: 30px;
     }
 
     .TemplateThumb {
@@ -192,6 +233,31 @@ html, body {
     }
 }
 
+#mtu-PopUp {
+    overflow: auto;
+	position: fixed;
+	top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+	z-index: 99;
+	background-color: rgba(0,0,0,0.75);
+
+    .modal {
+        position: relative;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 12;
+        width: 95%;
+        display: flex; flex-flow: column;
+    }
+
+    button {
+        font-size: 20px;
+    }
+}
+
 @media only screen and (max-width: 1200px) {
     .TemplateGallery {
         width: 100%;
@@ -203,5 +269,9 @@ html, body {
             justify-content: flex-start;
             align-items: flex-start;
         }
+    }
+
+    #pdfPreviewButton {
+        display: block;
     }
 }

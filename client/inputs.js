@@ -190,13 +190,4 @@ export default class Inputs extends React.Component {
             </div>
         )
     }
-    // <TextInput placeHolder="Meetup Name" label="Meetup Name" />
-    // <TextInput placeHolder="Event Name" label="Event Name" />
-    // <TextInput placeHolder="www.meetup.com" label="Link (URL)" />
-    // <DateInput label="Date" defaultValue={this.getCurrentDate()} />
-    // <TimeInput label="Start time" defaultValue={new Date()} />
-    // <TextInput placeHolder="A nice place" label="Location Name" />
-    // <TextInput placeHolder="www.location.com" label="Location Link (URL)" />
-    // <TextInput placeHolder="street nr" label="Location Address" />
-    // <TextInput placeHolder="maps.google.com" label="Location Map Link (URL)" />
 }

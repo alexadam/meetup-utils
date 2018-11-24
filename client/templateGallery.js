@@ -1118,8 +1118,8 @@ export default class TemplateGallery extends React.Component {
         if (this.state.templateSelected) {
             return (
                 <div className="TemplateGallery">
-                    <div className="TemplateGalleryRow">
-                        <button onClick={this.selectOtherTemplate}>Select a different template</button>
+                    <div className="TemplateGalleryRow TemplateGalleryRow-BackButton">
+                        <button className="SpecialButton" onClick={this.selectOtherTemplate}>&larr; Select a different template</button>
                     </div>
                 </div>
             )
