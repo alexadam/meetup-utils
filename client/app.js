@@ -93,7 +93,7 @@ class App extends React.Component {
             <div id="appContainer">
                 <div className="mtu-header">
                     <div className="mtu-title">Meetup Utils</div>
-                    <div className="mtu-text">Create ready to print posters and indicators for meetups</div>
+                    <div className="mtu-sub-title">Create ready to print posters and indicators for meetups</div>
                 </div>
                 <div className="app-container-row">
                     <TemplateGallery onTemplateSelected={this.onTemplateSelected} />

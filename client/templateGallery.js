@@ -1100,6 +1100,9 @@ class TemplatePreview extends React.Component {
     }
 }
 
+import MeetupAPI from './meetupApi'
+
+
 export default class TemplateGallery extends React.Component {
 
     state = {
@@ -1124,9 +1127,15 @@ export default class TemplateGallery extends React.Component {
         })
     }
 
+
     render = () => {
 
         if (this.state.templateSelected) {
+            /*
+            <div className="TemplateGalleryRow">
+                <MeetupAPI />
+            </div>
+            */
             return (
                 <div className="TemplateGallery">
                     <div className="TemplateGalleryRow TemplateGalleryRow-BackButton">
@@ -1142,7 +1151,7 @@ export default class TemplateGallery extends React.Component {
         return (
             <div className="TemplateGallery">
                 <div className="mtu-header">
-                    <div className="mtu-text">Step 1. Select a template:</div>
+                    <div className="mtu-text">Select a template:</div>
                 </div>
                 <div className="TemplateGalleryRow">
                     <TemplatePreview onTemplateSelected={this.onTemplateSelected} templateData={generalInfo} />
