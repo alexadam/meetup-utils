@@ -77,7 +77,8 @@ const generalInfo = {
     	author: 'meetup-utils',
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
-    }
+    },
+    previewUrl: '/client/assets/previews/1.jpeg'
 }
 
 const generalInfo2 = {
@@ -164,7 +165,8 @@ const generalInfo2 = {
     	author: 'meetup-utils',
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
-    }
+    },
+    previewUrl: '/client/assets/previews/2.jpeg'
 }
 
 const directionsRight = {
@@ -264,7 +266,8 @@ const directionsRight = {
     	author: 'meetup-utils',
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
-    }
+    },
+    previewUrl: '/client/assets/previews/d1.jpeg'
 }
 
 const directionsLeft = {
@@ -364,7 +367,8 @@ const directionsLeft = {
     	author: 'meetup-utils',
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
-    }
+    },
+    previewUrl: '/client/assets/previews/d4.jpeg'
 }
 
 const directionsTop = {
@@ -464,7 +468,8 @@ const directionsTop = {
     	author: 'meetup-utils',
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
-    }
+    },
+    previewUrl: '/client/assets/previews/d2.jpeg'
 }
 
 const directionsDown = {
@@ -564,7 +569,8 @@ const directionsDown = {
     	author: 'meetup-utils',
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
-    }
+    },
+    previewUrl: '/client/assets/previews/d3.jpeg'
 }
 
 
@@ -709,7 +715,8 @@ const miscInfoWiFi = {
     	author: 'meetup-utils',
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
-    }
+    },
+    previewUrl: '/client/assets/previews/w1.jpeg'
 }
 
 const miscInfoWiFiLarge = {
@@ -877,7 +884,8 @@ const miscInfoWiFiLarge = {
     	author: 'meetup-utils',
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
-    }
+    },
+    previewUrl: '/client/assets/previews/w2.jpeg'
 }
 
 const addressInfo = {
@@ -997,7 +1005,8 @@ const addressInfo = {
     	author: 'meetup-utils',
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
-    }
+    },
+    previewUrl: '/client/assets/previews/3.jpeg'
 }
 
 const nameCards = {
@@ -1083,7 +1092,9 @@ class TemplatePreview extends React.Component {
     render = () => {
         return (
             <div className="TemplatePreview" onClick={this.onClick}>
-                <div className="TemplateThumb landscape effect"></div>
+                <div className="TemplateThumb landscape effect">
+                    <img src={this.props.templateData.previewUrl} alt=""/>
+                </div>
             </div>
         )
     }

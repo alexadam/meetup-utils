@@ -15,7 +15,7 @@ export default class PDFPreview extends React.Component {
             el = document.getElementById('mtu-PopUp')
         }
         let bbp = el.getBoundingClientRect()
-        
+
         this.setState({
             pageWidth: bbp.width - bbp.width/20
         })
@@ -36,6 +36,7 @@ export default class PDFPreview extends React.Component {
 
         return (
             <div id="PDFPreview">
+                <div className='mtu-preview-label'>Preview:</div>
                 <Document
                   file={this.props.data}
                   onLoadSuccess={this.onDocumentLoadSuccess}
