@@ -17,7 +17,7 @@ const generalInfo = {
         {
             label: 'Meetup Logo',
             type: 'image',
-            value: '/client/assets/meetup-logo-300.png',
+            value: './client/assets/meetup-logo-300.png',
             id: 'meetupLogo',
             include: true,
             graphic: {
@@ -78,7 +78,7 @@ const generalInfo = {
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
     },
-    previewUrl: '/client/assets/previews/1.jpeg'
+    previewUrl: './client/assets/previews/1.jpeg'
 }
 
 const generalInfo2 = {
@@ -86,7 +86,7 @@ const generalInfo2 = {
         {
             label: 'Meetup Logo',
             type: 'image',
-            value: '/client/assets/meetup-logo-300.png',
+            value: './client/assets/meetup-logo-300.png',
             id: 'meetupLogo',
             include: true,
             graphic: {
@@ -166,7 +166,7 @@ const generalInfo2 = {
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
     },
-    previewUrl: '/client/assets/previews/2.jpeg'
+    previewUrl: './client/assets/previews/2.jpeg'
 }
 
 const directionsRight = {
@@ -174,7 +174,7 @@ const directionsRight = {
         {
             label: 'Meetup Logo',
             type: 'image',
-            value: '/client/assets/meetup-logo-300.png',
+            value: './client/assets/meetup-logo-300.png',
             id: 'meetupLogo',
             include: true,
             graphic: {
@@ -267,7 +267,7 @@ const directionsRight = {
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
     },
-    previewUrl: '/client/assets/previews/d1.jpeg'
+    previewUrl: './client/assets/previews/d1.jpeg'
 }
 
 const directionsLeft = {
@@ -275,7 +275,7 @@ const directionsLeft = {
         {
             label: 'Meetup Logo',
             type: 'image',
-            value: '/client/assets/meetup-logo-300.png',
+            value: './client/assets/meetup-logo-300.png',
             id: 'meetupLogo',
             include: true,
             graphic: {
@@ -368,7 +368,7 @@ const directionsLeft = {
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
     },
-    previewUrl: '/client/assets/previews/d4.jpeg'
+    previewUrl: './client/assets/previews/d4.jpeg'
 }
 
 const directionsTop = {
@@ -376,7 +376,7 @@ const directionsTop = {
         {
             label: 'Meetup Logo',
             type: 'image',
-            value: '/client/assets/meetup-logo-300.png',
+            value: './client/assets/meetup-logo-300.png',
             id: 'meetupLogo',
             include: true,
             graphic: {
@@ -469,7 +469,7 @@ const directionsTop = {
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
     },
-    previewUrl: '/client/assets/previews/d2.jpeg'
+    previewUrl: './client/assets/previews/d2.jpeg'
 }
 
 const directionsDown = {
@@ -477,7 +477,7 @@ const directionsDown = {
         {
             label: 'Meetup Logo',
             type: 'image',
-            value: '/client/assets/meetup-logo-300.png',
+            value: './client/assets/meetup-logo-300.png',
             id: 'meetupLogo',
             include: true,
             graphic: {
@@ -570,7 +570,7 @@ const directionsDown = {
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
     },
-    previewUrl: '/client/assets/previews/d3.jpeg'
+    previewUrl: './client/assets/previews/d3.jpeg'
 }
 
 
@@ -579,7 +579,7 @@ const miscInfoWiFi = {
         {
             label: 'Meetup Logo',
             type: 'image',
-            value: '/client/assets/meetup-logo-300.png',
+            value: './client/assets/meetup-logo-300.png',
             id: 'meetupLogo',
             include: true,
             graphic: {
@@ -716,7 +716,7 @@ const miscInfoWiFi = {
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
     },
-    previewUrl: '/client/assets/previews/w1.jpeg'
+    previewUrl: './client/assets/previews/w1.jpeg'
 }
 
 const miscInfoWiFiLarge = {
@@ -724,7 +724,7 @@ const miscInfoWiFiLarge = {
         {
             label: 'Meetup Logo',
             type: 'image',
-            value: '/client/assets/meetup-logo-300.png',
+            value: './client/assets/meetup-logo-300.png',
             id: 'meetupLogo',
             include: true,
             graphic: {
@@ -885,7 +885,7 @@ const miscInfoWiFiLarge = {
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
     },
-    previewUrl: '/client/assets/previews/w2.jpeg'
+    previewUrl: './client/assets/previews/w2.jpeg'
 }
 
 const addressInfo = {
@@ -893,7 +893,7 @@ const addressInfo = {
         {
             label: 'Meetup Logo',
             type: 'image',
-            value: '/client/assets/meetup-logo-300.png',
+            value: './client/assets/meetup-logo-300.png',
             id: 'meetupLogo',
             include: true,
             graphic: {
@@ -1006,7 +1006,7 @@ const addressInfo = {
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
     },
-    previewUrl: '/client/assets/previews/3.jpeg'
+    previewUrl: './client/assets/previews/3.jpeg'
 }
 
 const nameCards = {
@@ -1014,7 +1014,7 @@ const nameCards = {
         {
             label: 'Meetup Logo',
             type: 'image',
-            value: '/client/assets/meetup-logo-300.png',
+            value: './client/assets/meetup-logo-300.png',
             id: 'meetupLogo',
             include: true,
             graphic: {
