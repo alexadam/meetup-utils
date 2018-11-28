@@ -1093,7 +1093,7 @@ class TemplatePreview extends React.Component {
         return (
             <div className="TemplatePreview" onClick={this.onClick}>
                 <div className="TemplateThumb landscape effect">
-                    <img src={this.props.templateData.previewUrl} alt=""/>
+                    <img className="mtu-preview-image landscape" src={this.props.templateData.previewUrl} alt=""/>
                 </div>
             </div>
         )
