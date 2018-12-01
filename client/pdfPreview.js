@@ -1,25 +1,6 @@
 import React from 'react'
-import { Document, Page } from 'react-pdf';
-
 
 export default class PDFPreview extends React.Component {
-
-    state = {
-        pageWidth: 780
-    }
-
-    onDocumentLoadSuccess = () => {}
-    onRender = () => {
-        let el = document.getElementById('PDFPreview')
-        if (this.props.inPopUp) {
-            el = document.getElementById('mtu-PopUp')
-        }
-        let bbp = el.getBoundingClientRect()
-
-        this.setState({
-            pageWidth: bbp.width - bbp.width/20
-        })
-    }
 
     render = () => {
 
@@ -30,19 +11,17 @@ export default class PDFPreview extends React.Component {
         let el = document.getElementById('appContainer')
         let bbox = el.getBoundingClientRect()
 
-        if (bbox.width < 600 && !this.props.inPopUp) {
+        if (bbox.width <= 1100 && !this.props.inPopUp) {
             return null
         }
 
         return (
             <div id="PDFPreview">
                 <div className='mtu-preview-label'>Preview:</div>
-                <Document
-                  file={this.props.data}
-                  onLoadSuccess={this.onDocumentLoadSuccess}
-                >
-                  <Page pageNumber={1} width={this.state.pageWidth} onRenderSuccess={this.onRender}/>
-                </Document>
+                <object className="pdf-preview-obj" data={this.props.data} type="application/pdf">
+                    <embed className="pdf-preview-embed" src={this.props.data} type="application/pdf" />
+                </object>
+
             </div>
         )
     }

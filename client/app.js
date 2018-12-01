@@ -19,9 +19,8 @@ class PopUp extends React.Component {
             return null
         }
         return (
-            <div id="mtu-PopUp">
-                <div className="modal">
-                    <button onClick={()=>this.props.onClose()}>X Close</button>
+            <div className="popup">
+                <div className="popup-inner">
                     {this.props.children}
                 </div>
             </div>
@@ -83,6 +82,7 @@ class App extends React.Component {
                     </div>
                     <PDFPreview data={this.state.pdf}/>
                     <PopUp onClose={this.togglePreviewPdf} isVisible={this.state.popupVisible}>
+                        <button onClick={this.togglePreviewPdf}>X Close</button>
                         <PDFPreview data={this.state.pdf} inPopUp={true}/>
                     </PopUp>
                 </div>
