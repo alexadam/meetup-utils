@@ -34,6 +34,7 @@ const generalInfo = {
             label: 'Meetup Name',
             type: 'multiline-text',
             value: 'Meetup Name',
+            linkTo: 'meetupName',
             id: 'meetupName',
             include: true,
             graphic: {
@@ -54,6 +55,7 @@ const generalInfo = {
             type: 'text',
             value: 'https://www.meetup.com',
             id: 'meetupQR',
+            linkTo: 'eventUrl',
             include: true,
             graphic: {
                 type: 'qr',
@@ -103,6 +105,7 @@ const generalInfo2 = {
             label: 'Meetup Name',
             type: 'multiline-text',
             value: 'Meetup Name',
+            linkTo: 'meetupName',
             id: 'meetupName',
             include: true,
             graphic: {
@@ -123,6 +126,7 @@ const generalInfo2 = {
             type: 'multiline-text',
             value: 'Event Name',
             id: 'eventName',
+            linkTo: 'eventName',
             include: true,
             graphic: {
                 type: 'text',
@@ -142,6 +146,7 @@ const generalInfo2 = {
             type: 'text',
             value: 'https://www.meetup.com',
             id: 'meetupQR',
+            linkTo: 'eventUrl',
             include: true,
             graphic: {
                 type: 'qr',
@@ -191,6 +196,7 @@ const directionsRight = {
             label: 'Meetup Name',
             type: 'multiline-text',
             value: 'Meetup Name',
+            linkTo: 'meetupName',
             id: 'meetupName',
             include: true,
             graphic: {
@@ -211,6 +217,7 @@ const directionsRight = {
             type: 'text',
             value: 'https://www.meetup.com',
             id: 'meetupQR',
+            linkTo: 'eventUrl',
             include: true,
             graphic: {
                 type: 'qr',
@@ -238,6 +245,7 @@ const directionsRight = {
             type: 'multiline-text',
             value: '',
             id: 'arrowText',
+            linkTo: 'arrowText',
             include: false,
             graphic: {
                 type: 'text',
@@ -292,6 +300,7 @@ const directionsLeft = {
             label: 'Meetup Name',
             type: 'multiline-text',
             value: 'Meetup Name',
+            linkTo: 'meetupName',
             id: 'meetupName',
             include: true,
             graphic: {
@@ -312,6 +321,7 @@ const directionsLeft = {
             type: 'text',
             value: 'https://www.meetup.com',
             id: 'meetupQR',
+            linkTo: 'eventUrl',
             include: true,
             graphic: {
                 type: 'qr',
@@ -339,6 +349,7 @@ const directionsLeft = {
             type: 'multiline-text',
             value: '',
             id: 'arrowText',
+            linkTo: 'arrowText',
             include: false,
             graphic: {
                 type: 'text',
@@ -393,6 +404,7 @@ const directionsTop = {
             label: 'Meetup Name',
             type: 'multiline-text',
             value: 'Meetup Name',
+            linkTo: 'meetupName',
             id: 'meetupName',
             include: true,
             graphic: {
@@ -413,6 +425,7 @@ const directionsTop = {
             type: 'text',
             value: 'https://www.meetup.com',
             id: 'meetupQR',
+            linkTo: 'eventUrl',
             include: true,
             graphic: {
                 type: 'qr',
@@ -440,6 +453,7 @@ const directionsTop = {
             type: 'multiline-text',
             value: '',
             id: 'arrowText',
+            linkTo: 'arrowText',
             include: false,
             graphic: {
                 type: 'text',
@@ -494,6 +508,7 @@ const directionsDown = {
             label: 'Meetup Name',
             type: 'multiline-text',
             value: 'Meetup Name',
+            linkTo: 'meetupName',
             id: 'meetupName',
             include: true,
             graphic: {
@@ -514,6 +529,7 @@ const directionsDown = {
             type: 'text',
             value: 'https://www.meetup.com',
             id: 'meetupQR',
+            linkTo: 'eventUrl',
             include: true,
             graphic: {
                 type: 'qr',
@@ -541,6 +557,7 @@ const directionsDown = {
             type: 'multiline-text',
             value: '',
             id: 'arrowText',
+            linkTo: 'arrowText',
             include: false,
             graphic: {
                 type: 'text',
@@ -596,6 +613,7 @@ const miscInfoWiFi = {
             label: 'Meetup Name',
             type: 'multiline-text',
             value: 'Meetup Name',
+            linkTo: 'meetupName',
             id: 'meetupName',
             include: true,
             graphic: {
@@ -616,6 +634,7 @@ const miscInfoWiFi = {
             type: 'text',
             value: 'https://www.meetup.com',
             id: 'meetupQR',
+            linkTo: 'eventUrl',
             include: true,
             graphic: {
                 type: 'qr',
@@ -649,6 +668,7 @@ const miscInfoWiFi = {
             type: 'text',
             value: '',
             id: 'value1',
+            linkTo: 'wifiName',
             include: true,
             graphic: {
                 type: 'text',
@@ -687,6 +707,7 @@ const miscInfoWiFi = {
             type: 'text',
             value: '',
             id: 'value2',
+            linkTo: 'wifiPassword',
             include: true,
             graphic: {
                 type: 'text',
@@ -741,6 +762,7 @@ const miscInfoWiFiLarge = {
             label: 'Meetup Name',
             type: 'multiline-text',
             value: 'Meetup Name',
+            linkTo: 'meetupName',
             id: 'meetupName',
             include: true,
             graphic: {
@@ -780,6 +802,7 @@ const miscInfoWiFiLarge = {
             type: 'text',
             value: '',
             id: 'value1',
+            linkTo: 'wifiName',
             include: true,
             graphic: {
                 type: 'text',
@@ -818,6 +841,7 @@ const miscInfoWiFiLarge = {
             type: 'text',
             value: '',
             id: 'value2',
+            linkTo: 'wifiPassword',
             include: true,
             graphic: {
                 type: 'text',
@@ -837,6 +861,7 @@ const miscInfoWiFiLarge = {
             type: 'text',
             value: 'Other',
             id: 'label3',
+            linkTo: 'wifiMiscLabel',
             include: true,
             graphic: {
                 type: 'text',
@@ -856,6 +881,7 @@ const miscInfoWiFiLarge = {
             type: 'multiline-text',
             value: '',
             id: 'value3',
+            linkTo: 'wifiMiscValue',
             include: true,
             graphic: {
                 type: 'text',
@@ -910,6 +936,7 @@ const addressInfo = {
             label: 'Meetup Name',
             type: 'multiline-text',
             value: 'Meetup Name',
+            linkTo: 'meetupName',
             id: 'meetupName',
             include: true,
             graphic: {
@@ -930,6 +957,7 @@ const addressInfo = {
             type: 'multiline-text',
             value: 'Event Name',
             id: 'eventName',
+            linkTo: 'eventName',
             include: true,
             graphic: {
                 type: 'text',
@@ -949,6 +977,7 @@ const addressInfo = {
             type: 'text',
             value: 'https://www.meetup.com',
             id: 'meetupQR',
+            linkTo: 'eventUrl',
             include: true,
             graphic: {
                 type: 'qr',
@@ -963,6 +992,7 @@ const addressInfo = {
             type: 'multiline-text',
             value: 'Address',
             id: 'eventLocation',
+            linkTo: 'venueAddress',
             include: true,
             graphic: {
                 type: 'text',
@@ -982,6 +1012,7 @@ const addressInfo = {
             type: 'text',
             value: 'https://www.openstreetmap.org',
             id: 'meetupMapQR',
+            linkTo: 'venueMapUrl',
             include: true,
             graphic: {
                 type: 'qr',
@@ -1051,6 +1082,7 @@ const nameCards = {
             type: 'text',
             value: 'Event Name',
             id: 'eventName',
+            linkTo: 'eventName',
             include: true,
             graphic: {
                 type: 'text',
@@ -1115,6 +1147,9 @@ export default class TemplateGallery extends React.Component {
             templateSelected: templateData
         }, () => {
             this.props.onTemplateSelected(templateData)
+            setTimeout(()=>{
+                window.scrollTo(0, document.body.scrollHeight);
+            }, 500)
         })
 
     }
@@ -1130,20 +1165,20 @@ export default class TemplateGallery extends React.Component {
 
     render = () => {
 
-        if (this.state.templateSelected) {
-            /*
-            <div className="TemplateGalleryRow">
-                <MeetupAPI />
-            </div>
-            */
-            return (
-                <div className="TemplateGallery">
-                    <div className="TemplateGalleryRow TemplateGalleryRow-BackButton">
-                        <button className="SpecialButton" onClick={this.selectOtherTemplate}>&larr; Select a different template</button>
-                    </div>
-                </div>
-            )
-        }
+        // if (this.state.templateSelected) {
+        //     /*
+        //     <div className="TemplateGalleryRow">
+        //         <MeetupAPI />
+        //     </div>
+        //     */
+        //     return (
+        //         <div className="TemplateGallery">
+        //             <div className="TemplateGalleryRow TemplateGalleryRow-BackButton">
+        //                 <button className="SpecialButton" onClick={this.selectOtherTemplate}>&larr; Select a different template</button>
+        //             </div>
+        //         </div>
+        //     )
+        // }
 
         // <div className="TemplateGalleryRow">
         //     <TemplatePreview onTemplateSelected={this.onTemplateSelected} templateData={nameCards} />

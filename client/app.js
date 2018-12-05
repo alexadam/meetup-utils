@@ -9,6 +9,7 @@ import QRious from 'qrious'
 import Inputs from './inputs'
 import TemplateGallery from './templateGallery'
 import PDFPreview from './pdfPreview'
+import MeetupAPI from './meetupApi'
 
 import {getPdfUrl, savePdf} from './buildPDF'
 
@@ -33,25 +34,87 @@ class App extends React.Component {
     state = {
         pdf: null,
         dataModel: null,
-        popupVisible: false
+        popupVisible: false,
+        globalData: {
+            meetupName: 'Meetup Name global',
+            meetupUrl: '',
+            eventName: 'Event Name',
+            eventDate: '',
+            eventTime: '',
+            eventUrl: 'https://www.meetup.com',
+            venueName: '',
+            venueAddress: 'Address',
+            venueCity: '',
+            venueCountry: '',
+            venueMapUrl: 'https://www.openstreetmap.org',
+            venueLat: '',
+            venueLng: '',
+            wifiName: '',
+            wifiPassword: '',
+            wifiMiscLabel: '',
+            wifiMiscValue: '',
+            attendees: [
+                {
+                    name: ''
+                }
+            ],
+            arrowText: ''
+        }
+    }
+
+    extractGlobalDataFromTemplate = (templateData) => {
+        let newGlobalData = JSON.parse(JSON.stringify(this.state.globalData))
+        for (let mData of templateData.meetupData) {
+            if (mData.linkTo) {
+                newGlobalData[mData.linkTo] = mData.value
+            }
+        }
+        return newGlobalData
+    }
+
+    prepareTemplateWithGlobalData = (templateData) => {
+        for (let mData of templateData.meetupData) {
+            if (mData.linkTo) {
+                mData.value = this.state.globalData[mData.linkTo]
+            }
+        }
+        return templateData
     }
 
     onNewData = (newData) => {
         getPdfUrl(newData, (newPdf) => {
+            let newGlobalData = this.extractGlobalDataFromTemplate(newData)
             this.setState({
                 dataModel: newData,
-                pdf: newPdf
+                pdf: newPdf,
+                globalData: newGlobalData
             })
         })
     }
 
+    onAPIData = (newData) => {
+        let keys = Object.keys(newData.meetupData)
+        let newGlobalData = JSON.parse(JSON.stringify(this.state.globalData))
+        for (let key of keys) {
+            console.log(key, newData.meetupData[key]);
+            newGlobalData[key] = newData.meetupData[key]
+        }
+        newGlobalData.attendees = newData.attendees
+
+        this.setState({
+            globalData: newGlobalData
+        })
+    }
+
     onTemplateSelected = (selectedTemplate) => {
+        console.log('gl data', this.state.globalData);
         if (!selectedTemplate) {
             this.setState({
                 dataModel: null,
                 pdf: null
             })
         } else {
+            selectedTemplate = this.prepareTemplateWithGlobalData(selectedTemplate)
             getPdfUrl(selectedTemplate, (newPdf) => {
                 this.setState({
                     dataModel: selectedTemplate,
@@ -97,6 +160,9 @@ class App extends React.Component {
                 </div>
                 <div className="app-container-row">
                     <TemplateGallery onTemplateSelected={this.onTemplateSelected} />
+                </div>
+                <div className="app-container-row center-content">
+                    <MeetupAPI onAPIData={this.onAPIData}/>
                 </div>
                 {pdfSettings}
             </div>);

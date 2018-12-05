@@ -26,6 +26,9 @@ html, body {
 .app-container-row {
     display: flex; flex-flow: row; width: 100%; //height: 100%;
 }
+.center-content {
+    justify-content: center;
+}
 
 .mtu-canvas-container {
     // width: 100%; height: 100%;
@@ -49,8 +52,9 @@ html, body {
 
 .mtu-text {
     font-family: sans-serif;
-    font-size: 20px;
-    margin: 20px;
+    font-size: 40px;
+    padding: 40px;
+    margin-top: 100px;
     font-weight: bold;
 }
 .mtu-sub-title {
@@ -110,7 +114,7 @@ html, body {
     margin-bottom: 5px;
     font-family: sans-serif;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 16px;
 }
 
 .mtu-preview-label {
@@ -121,11 +125,12 @@ html, body {
 
 .mtu-input-component {
     font-family: sans-serif;
-    font-size: 12px;
-    padding: 3px;
+    font-size: 16px;
+    padding: 10px;
     line-height: 100%;
     vertical-align: middle;
     border: solid 1px black;
+    border-radius: 3px;
 }
 
 .mtu-api-container {
