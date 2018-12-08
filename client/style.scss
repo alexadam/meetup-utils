@@ -135,6 +135,14 @@ html, body {
 
 .mtu-api-container {
     align-self: flex-start;
+
+    .menu {
+        text-align: center;
+
+        .SpecialButton {
+            margin-right: 15px;
+        }
+    }
 }
 
 .PosterSettings {

@@ -6,7 +6,8 @@ export default class MeetupAPI extends React.Component {
         secretKey: '',
         eventUrl: 'https://www.meetup.com/research-in-cluj/events/256694729/',
         eventName: '',
-        eventId: ''
+        eventId: '',
+        dataExtracted: false,
     }
 
     onNewSecretKey = (e) => {
@@ -18,23 +19,30 @@ export default class MeetupAPI extends React.Component {
 
     onNewUrl = (e) => {
         let newValue = e.target.value
+        let result = this.extractEventNameAndID(newValue)
         this.setState({
             eventUrl: newValue,
+            eventName: result.eventName,
+            eventId: result.eventId,
         })
-        this.extractEventNameAndID(newValue)
     }
 
     extractEventNameAndID = (url) => {
         let parts = url.split('/events/')
         let myRegexp = /([^\/]+)\/events\/([^\/]+)/i;
-        let match = myRegexp.exec(newValue);
+        let match = myRegexp.exec(url);
+        if (!match) {
+            return {
+                eventName: '',
+                eventId: ''
+            }
+        }
         let name = match[1]
         let eventId = match[2]
-
-        this.setState({
+        return {
             eventName: name,
             eventId: eventId
-        })
+        }
     }
 
     jsonp = (url, callback) => {
@@ -54,15 +62,19 @@ export default class MeetupAPI extends React.Component {
        return new Promise((resolve, reject)=>{
            let murl = this.state.eventName + '/events/' + this.state.eventId
            this.jsonp('https://api.meetup.com/'+murl+'/rsvps?&sign=true&key='+this.state.secretKey, (data) => {
-               let guests = []
 
+               let err = data.data.errors
+               if (err && err.length > 0) {
+                   resolve({type: 'error', message: 'Error: ' + err[0].code + ' ' + err[0].message})
+                   return
+               }
+
+               let guests = []
                for (let gData of data.data) {
                    guests.push({
                        name: gData.member.name
                    })
                }
-
-              console.log(guests);
 
               resolve(guests)
            });
@@ -70,14 +82,15 @@ export default class MeetupAPI extends React.Component {
    }
 
    getMeetupInfo = () => {
-
-       if (this.state.secretKey.trim().length === 0) {
-           ERROR
-       } // TODO -> if empty
-
        return new Promise((resolve, reject)=>{
            let murl = this.state.eventName + '/events/' + this.state.eventId
            this.jsonp('https://api.meetup.com/'+murl+'?&sign=true&key='+this.state.secretKey, (data) => {
+
+               let err = data.data.errors
+               if (err && err.length > 0) {
+                   resolve({type: 'error', message: 'Error: ' + err[0].code + ' ' + err[0].message})
+                   return
+               }
 
                let eventData = {
                    meetupName: data.data.group['name'],
@@ -92,7 +105,6 @@ export default class MeetupAPI extends React.Component {
                    venueLat: data.data.venue['lat'],
                    venueLng: data.data.venue['lon']
                }
-              console.log(eventData);
               resolve(eventData)
            });
 
@@ -101,40 +113,94 @@ export default class MeetupAPI extends React.Component {
     }
 
     getData = () => {
-        let allPromises = []
-        allPromises.push(this.getMeetupInfo())
-        allPromises.push(this.getAttendees())
 
-        Promise.all(allPromises).then((result) => {
-            let tmpData = {
-                meetupData: result[0],
-                attendees: result[1]
-            }
-            this.props.onAPIData(tmpData)
+        let tKey = this.state.secretKey.trim()
+        if (tKey.length === 0) {
+            let elem = document.getElementById('meetupAPIKey')
+            tKey = elem.value.trim()
+        }
+        let tURL = this.state.eventUrl.trim()
+        if (tURL.length === 0) {
+            let elem = document.getElementById('meetupURL')
+            tURL = elem.value.trim()
+        }
+
+        if (tKey.length === 0) {
+            alert('Please insert the API Key')
+            return
+        }
+        if (tURL.length === 0) {
+            alert('Please insert the Event\'s URL')
+            return
+        }
+
+        let result = this.extractEventNameAndID(tURL)
+
+        this.setState({
+            secretKey: tKey,
+            eventUrl: tURL,
+            eventName: result.eventName,
+            eventId: result.eventId,
+        }, () => {
+
+                    let allPromises = []
+                    allPromises.push(this.getMeetupInfo())
+                    allPromises.push(this.getAttendees())
+
+                    Promise.all(allPromises).then((result) => {
+                        if (result[0].type === 'error') {
+                            alert(result[0].message)
+                            return
+                        }
+                        if (result[1].type === 'error') {
+                            alert(result[1].message)
+                            return
+                        }
+                        let tmpData = {
+                            meetupData: result[0],
+                            attendees: result[1]
+                        }
+                        this.props.onAPIData(tmpData)
+                        this.setState({
+                            dataExtracted: true
+                        })
+                    })
         })
+
 
     }
 
     render = () => {
 
+        if (this.state.dataExtracted === true) {
+            return (
+                <div className='mtu-api-container'>
+                    <div className="mtu-header">
+                        <div className="mtu-text">Data extracted successfully!</div>
+                    </div>
+                    <div className="menu">
+                        <button className="SpecialButton" onClick={this.seeData}>See data...</button>
+                        <button className="SpecialButton" onClick={()=>this.setState({dataExtracted:false})}>Get new data...</button>
+                    </div>
+                </div>
+            )
+        }
+
         return (
             <div className='mtu-api-container'>
                 <div className="mtu-header">
-                    <div className="mtu-text">Extract data from meetup.com</div>
+                    <div className="mtu-text">Get data from meetup.com</div>
                 </div>
                 <div className='mtu-input'>
-                    <label className='mtu-input-label'>meetup.com API Key</label>
-                    <input className='mtu-input-component' type="password" value={this.state.secretKey} onChange={this.onNewSecretKey}/>
+                    <label className='mtu-input-label'>meetup.com <a href="https://secure.meetup.com/meetup_api/key/">API Key</a></label>
+                    <input id='meetupAPIKey' className='mtu-input-component' type="password" value={this.state.secretKey} onChange={this.onNewSecretKey}/>
                 </div>
                 <div className='mtu-input'>
                     <label className='mtu-input-label'>meetup.com event URL</label>
-                    <input className='mtu-input-component' type="text" placeholder='' value={this.state.eventUrl} onChange={this.onNewUrl}/>
+                    <input id='meetupURL' className='mtu-input-component' type="text" placeholder='Example: https://www.meetup.com/group-name/events/1234567/' value={this.state.eventUrl} onChange={this.onNewUrl}/>
                 </div>
-                <div>
-                    <button className="SpecialButton" onClick={this.getData}>Extract Data...</button>
-                </div>
-                <div className="mtu-header">
-                    <div className="mtu-text">Or add/change data manually:</div>
+                <div className="menu">
+                    <button className="SpecialButton" onClick={this.getData}>Get data</button>
                 </div>
             </div>
         )

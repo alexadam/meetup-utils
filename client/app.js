@@ -96,18 +96,16 @@ class App extends React.Component {
         let keys = Object.keys(newData.meetupData)
         let newGlobalData = JSON.parse(JSON.stringify(this.state.globalData))
         for (let key of keys) {
-            console.log(key, newData.meetupData[key]);
             newGlobalData[key] = newData.meetupData[key]
         }
         newGlobalData.attendees = newData.attendees
 
         this.setState({
             globalData: newGlobalData
-        })
+        }, () => this.onTemplateSelected(this.state.dataModel))
     }
 
     onTemplateSelected = (selectedTemplate) => {
-        console.log('gl data', this.state.globalData);
         if (!selectedTemplate) {
             this.setState({
                 dataModel: null,
@@ -135,20 +133,27 @@ class App extends React.Component {
         let pdfSettings = null;
         if (this.state.dataModel) {
             pdfSettings = (
-                <div className="app-container-row PosterSettings">
-                    <div className="left-menu">
-                        <Inputs data={this.state.dataModel} onNewData={this.onNewData} />
-                        <div className="menu-buttons">
-                            <button id="pdfPreviewButton" className="SpecialButton" onClick={this.togglePreviewPdf}>Preview PDF...</button>
-                            <button className="SpecialButton" onClick={() => savePdf(this.state.dataModel)}>Save PDF...</button>
-                        </div>
+                <div style={{display: 'flex', flexFlow: 'column'}}>
+                    <div className="mtu-header">
+                        <div className="mtu-text">Add or change data:</div>
                     </div>
-                    <PDFPreview data={this.state.pdf}/>
-                    <PopUp onClose={this.togglePreviewPdf} isVisible={this.state.popupVisible}>
-                        <button onClick={this.togglePreviewPdf}>X Close</button>
-                        <PDFPreview data={this.state.pdf} inPopUp={true}/>
-                    </PopUp>
+                    <div className="app-container-row PosterSettings">
+
+                        <div className="left-menu">
+                            <Inputs data={this.state.dataModel} onNewData={this.onNewData} />
+                            <div className="menu-buttons">
+                                <button id="pdfPreviewButton" className="SpecialButton" onClick={this.togglePreviewPdf}>Preview PDF...</button>
+                                <button className="SpecialButton" onClick={() => savePdf(this.state.dataModel)}>Save PDF...</button>
+                            </div>
+                        </div>
+                        <PDFPreview data={this.state.pdf}/>
+                        <PopUp onClose={this.togglePreviewPdf} isVisible={this.state.popupVisible}>
+                            <button onClick={this.togglePreviewPdf}>X Close</button>
+                            <PDFPreview data={this.state.pdf} inPopUp={true}/>
+                        </PopUp>
+                    </div>
                 </div>
+
             )
         }
 
