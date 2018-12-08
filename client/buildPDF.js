@@ -149,28 +149,35 @@ function prepareDoc(pdfData, onDocReady) {
     doc.setProperties(pdfData.documentProperties);
 
     // for cards
-    // if (pdfData.posterData.repeat) {
-    //     let repeatX = pdfData.posterData.repeat[0]
-    //     let repeatXDim = pdfData.posterData.width / pdfData.posterData.repeat[0]
-    //     let repeatY = pdfData.posterData.repeat[1]
-    //     let repeatYDim = pdfData.posterData.height / pdfData.posterData.repeat[1]
-    //     let tmpNewData = []
-    //     for (let item of pdfData.meetupData) {
-    //         for (let i = 0; i < repeatX; i++) {
-    //             for (let j = 0; j < repeatY; j++) {
-    //                 if (i === 0 && j === 0) { // firstElem
-    //                     continue
-    //                 }
-    //                 let tmpElem = JSON.parse(JSON.stringify(item))
-    //                 tmpElem.graphic.x += repeatXDim * i
-    //                 tmpElem.graphic.y += repeatYDim * j
-    //                 tmpElem.id = item.id + i + '-' + j + Math.floor(Math.random()*100000)
-    //                 tmpNewData.push(tmpElem)
-    //             }
-    //         }
-    //     }
-    //     pdfData.meetupData = pdfData.meetupData.concat(tmpNewData)
-    // }
+    if (pdfData.posterData.repeat) {
+        let newPDFData = JSON.parse(JSON.stringify(pdfData))
+        newPDFData.meetupData = []
+
+        let repeatX = pdfData.posterData.repeat[0]
+        let repeatXDim = pdfData.posterData.width / pdfData.posterData.repeat[0]
+        let repeatY = pdfData.posterData.repeat[1]
+        let repeatYDim = pdfData.posterData.height / pdfData.posterData.repeat[1]
+        let tmpNewData = []
+
+        for (let item of pdfData.meetupData) {
+            for (let i = 0; i < repeatX; i++) {
+                for (let j = 0; j < repeatY; j++) {
+                    let tmpElem = JSON.parse(JSON.stringify(item))
+                    if (Array.isArray(tmpElem.value)) {
+                        let index = i*repeatX + j
+                        tmpElem.value = tmpElem.value[index] + ''
+                    }
+                    tmpElem.virtual = true
+                    tmpElem.graphic.x += repeatXDim * i
+                    tmpElem.graphic.y += repeatYDim * j
+                    tmpElem.id = item.id + i + '-' + j + Math.floor(Math.random()*100000)
+                    tmpNewData.push(tmpElem)
+                }
+            }
+        }
+        newPDFData.meetupData = newPDFData.meetupData.concat(tmpNewData)
+        pdfData = newPDFData
+    }
 
     let allPromises = []
 

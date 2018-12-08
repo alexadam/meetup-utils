@@ -71,9 +71,7 @@ export default class MeetupAPI extends React.Component {
 
                let guests = []
                for (let gData of data.data) {
-                   guests.push({
-                       name: gData.member.name
-                   })
+                   guests.push(gData.member.name)
                }
 
               resolve(guests)

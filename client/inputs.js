@@ -68,6 +68,34 @@ class MultiLIneTextInput extends React.Component {
     }
 }
 
+class ArrayInput extends MultiLIneTextInput {
+    constructor(props) {
+        super(props)
+    }
+
+    onNewText = (e) => {
+        let newValue = e.target.value
+        let parts = newValue.trim().split('\n')
+        let tmpData = {...this.state.data, value: parts}
+        this.setState({
+            data: tmpData
+        }, () => {
+            this.props.onDataChange(tmpData)
+        })
+    }
+
+    render = () => {
+        let value = this.state.data.value.join('\n')
+
+        return (
+            <div className='mtu-input'>
+                <label className='mtu-input-label'><input type="checkbox" checked={this.state.data.include} onChange={this.onChecked}/>{this.props.data.label}</label>
+                <textarea className='mtu-input-component' cols="30" rows="3" placeholder={this.props.data.value} value={value} onChange={this.onNewText}></textarea>
+            </div>
+        )
+    }
+}
+
 class GenericInput extends React.Component {
     state = {
         value: ""
@@ -177,10 +205,18 @@ export default class Inputs extends React.Component {
     render = () => {
 
         let inputComponents = this.state.data.meetupData.map((dataElem)=>{
+            if (dataElem.virtual) {
+                // FIXME for name cards NxN
+                return null
+            }
             if (dataElem.type === 'text') {
                 return <TextInput data={dataElem} onDataChange={this.onDataChange} key={dataElem.id + this.state.data.id}/>
-            } else if (dataElem.type === 'multiline-text') {
+            }
+            if (dataElem.type === 'multiline-text') {
                 return <MultiLIneTextInput data={dataElem} onDataChange={this.onDataChange} key={dataElem.id + this.state.data.id}/>
+            }
+            if (dataElem.type === 'text-array') {
+                return <ArrayInput data={dataElem} onDataChange={this.onDataChange} key={dataElem.id + this.state.data.id}/>
             }
         })
 

@@ -53,11 +53,9 @@ class App extends React.Component {
             wifiPassword: '',
             wifiMiscLabel: '',
             wifiMiscValue: '',
-            attendees: [
-                {
-                    name: ''
-                }
-            ],
+            attendees: ['Participant Name', 'Participant Name2', 'Participant Name3'
+                    , 'Participant Name4', 'Participant Name5', 'Participant Name6'
+                    , 'Participant Name7', 'Participant Name7', 'Participant Name9'],
             arrowText: ''
         }
     }

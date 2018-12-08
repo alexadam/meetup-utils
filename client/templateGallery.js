@@ -1059,10 +1059,13 @@ const nameCards = {
             }
         },
         {
-            label: 'Participant Name',
-            type: 'text',
-            value: 'Participant Name',
-            id: 'participantName',
+            label: 'Participant Names',
+            type: 'text-array',
+            value: ['Participant Name', 'Participant Name2', 'Participant Name3'
+                    , 'Participant Name4', 'Participant Name5', 'Participant Name6'
+                    , 'Participant Name7', 'Participant Name7', 'Participant Name9'],
+            id: 'participantNames',
+            linkTo: 'attendees',
             include: true,
             graphic: {
                 type: 'text',
@@ -1104,7 +1107,11 @@ const nameCards = {
         width: 297,
         height: 210,
         units: 'mm',
-        repeat: [3, 3]
+        cardWidth: 0,
+        cardHeight: 0,
+        marginWidth: 0,
+        marginHeight: 0,
+        repeat: [3, 3] // remove?
     },
     documentProperties: {
     	title: 'Title',
@@ -1112,7 +1119,8 @@ const nameCards = {
     	author: 'meetup-utils',
     	keywords: 'kw1, kw2',
     	creator: 'meetup-utils'
-    }
+    },
+    previewUrl: './client/assets/previews/names.jpg'
 }
 
 class TemplatePreview extends React.Component {
@@ -1202,6 +1210,7 @@ export default class TemplateGallery extends React.Component {
                 <div className="TemplateGalleryRow">
                     <TemplatePreview onTemplateSelected={this.onTemplateSelected} templateData={miscInfoWiFi} />
                     <TemplatePreview onTemplateSelected={this.onTemplateSelected} templateData={miscInfoWiFiLarge} />
+                    <TemplatePreview onTemplateSelected={this.onTemplateSelected} templateData={nameCards} />
                 </div>
             </div>
         )
