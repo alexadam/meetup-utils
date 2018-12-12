@@ -1,20 +1,30 @@
 # meetup-utils
-meetup utils
+Create ready to print posters and indicators for meetups
 
+# Demo (has bugs, work in progress)
+https://alexadam.github.io/demos/meetup-utils/index.html
 
-How to run the example
-=======
+![screenshot](/screenshot.png)
+
+# To Do
+ - better UI on small screens
+ - center text in PDFs
+ - add Wi-Fi auth. QR code
+ - better name cards template (multi-page, custom sizes)
+
+# How to run the example
 
 ```
 yarn install
 yarn dev
 ```
 
-Credits
-=======
+# Credits
 
 Meetup.com trademark: https://help.meetup.com/hc/en-us/articles/360001655932-Meetup-Trademark-Guidelines
+
 jsPDF, for generating the pdf file: https://github.com/MrRio/jsPDF
-React-PDF, for pdf preview: https://github.com/wojtekmaj/react-pdf#readme
+
 canvg, for adding SVG to pdf: https://github.com/canvg/canvg
+
 qrious, for QR codes: https://github.com/neocotic/qrious
