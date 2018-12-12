@@ -1,8 +1,12 @@
 # meetup-utils
 Create ready to print posters and indicators for meetups
 
-# Demo (has bugs, work in progress)
+# Demo
+(has bugs, work in progress)
+
 https://alexadam.github.io/demos/meetup-utils/index.html
+
+---
 
 ![screenshot](/screenshot.png)
 
