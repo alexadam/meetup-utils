@@ -36,7 +36,7 @@ class App extends React.Component {
         dataModel: null,
         popupVisible: false,
         globalData: {
-            meetupName: 'Meetup Name global',
+            meetupName: 'Meetup Name',
             meetupUrl: '',
             eventName: 'Event Name',
             eventDate: '',

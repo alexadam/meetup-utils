@@ -142,7 +142,7 @@ const addSVG = (doc, svgData, posterData) => {
         svgData.graphic.height);
 }
 
-function prepareDoc(pdfData, onDocReady) {
+const prepareDoc = (pdfData, onDocReady) => {
     let posterData = pdfData.posterData
     let doc = createPDFDoc(posterData.orientation, posterData.format, posterData.width, posterData.height, posterData.unit)
 
@@ -208,11 +208,11 @@ function prepareDoc(pdfData, onDocReady) {
     })
 }
 
-function getPdfUrl(pdfData, onDocReady) {
+const getPdfUrl = (pdfData, onDocReady) => {
     prepareDoc(pdfData, (doc) => onDocReady(doc.output('datauristring')))
 }
 
-function savePdf(pdfData) {
+const savePdf = (pdfData) => {
     prepareDoc(pdfData, (doc) => doc.save('meetup.pdf'))
 }
 

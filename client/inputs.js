@@ -160,7 +160,7 @@ class TimeInput extends React.Component {
 export default class Inputs extends React.Component {
 
     getCurrentDate = () => {
-        var local = new Date();
+        let local = new Date();
         local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
         return local.toJSON().slice(0,10)
     }
@@ -192,13 +192,9 @@ export default class Inputs extends React.Component {
     }
 
     static getDerivedStateFromProps = (props, state) => {
-        // FIXME
-        // if (props.data !== state.data) {
           return {
             data: props.data
           }
-        // }
-        // return null;
     }
 
 

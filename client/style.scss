@@ -1,6 +1,6 @@
 
 html, body {
-    height: 100%; width: 100%; padding: 0; margin: 0;
+    height: 100%; width: 100%; padding: 0; margin: 0; box-sizing: border-box;
     // background-color: #EEE1C9;
     background: #DEDBD1;
     background: #DFE0DB;
@@ -16,15 +16,15 @@ html, body {
 }
 
 #app {
-    height: 100%; width: 100%; padding: 0; margin: 0;
+    height: 100%; width: 100%; padding: 0; margin: 0; box-sizing: border-box;
 }
 
 #appContainer {
-    height: 100%; width: 100%; padding: 0; margin: 0;
+    // height: 100%; width: 100%; padding: 0; margin: 0; box-sizing: border-box;
     display: flex; flex-flow: column;
 }
 .app-container-row {
-    display: flex; flex-flow: row; width: 100%; //height: 100%;
+    display: flex; flex-flow: row; width: 100%; height: 100%;
 }
 .center-content {
     justify-content: center;
@@ -203,7 +203,7 @@ html, body {
 
 .TemplateGallery {
     width: 100%;
-    height: 100%;
+    // height: 100%;
     display: flex;
     flex-flow: column;
     justify-content: center;
@@ -232,7 +232,9 @@ html, body {
         margin: 20px;
         display: flex; flex-flow: column;
         cursor: pointer;
-        // box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+        // width: 200px; height: auto;
+        height: 100px; width: auto;
+        box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
     }
     .TemplateThumb:hover {
         box-shadow: 0 0 0.5cm rgba(0,0,0,0.25);

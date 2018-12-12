@@ -4,7 +4,7 @@ export default class MeetupAPI extends React.Component {
 
     state = {
         secretKey: '',
-        eventUrl: 'https://www.meetup.com/research-in-cluj/events/256694729/',
+        eventUrl: '',
         eventName: '',
         eventId: '',
         dataExtracted: false,
