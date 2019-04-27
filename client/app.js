@@ -29,12 +29,27 @@ class PopUp extends React.Component {
     }
 }
 
+class PDFPreviewRefresh extends React.Component {
+
+    render = () => {
+        return (
+            <div id="PDFPreview">
+                <div className="mtu-preview-row">
+                    <span className='mtu-preview-label'>Preview:</span>
+                    <button className='mtu-refresh-pdf-button SpecialButton' onClick={this.props.onRefreshRequest}>Refresh</button>
+                </div>
+            </div>
+        )
+    }
+}
+
 class App extends React.Component {
 
     state = {
         pdf: null,
         dataModel: null,
         popupVisible: false,
+        firstTimePDFRender: true,
         globalData: {
             meetupName: 'Meetup Name',
             meetupUrl: '',
@@ -80,12 +95,22 @@ class App extends React.Component {
     }
 
     onNewData = (newData) => {
-        getPdfUrl(newData, (newPdf) => {
-            let newGlobalData = this.extractGlobalDataFromTemplate(newData)
+        this.setState({
+            dataModel: newData,
+            pdfPreviewNeedsUpdate: true,
+            firstTimePDFRender: false
+        })
+
+    }
+
+    refreshPdfPreview = () => {
+        getPdfUrl(this.state.dataModel, (newPdf) => {
+            let newGlobalData = this.extractGlobalDataFromTemplate(this.state.dataModel)
             this.setState({
-                dataModel: newData,
+                // dataModel: newData,
                 pdf: newPdf,
-                globalData: newGlobalData
+                globalData: newGlobalData,
+                pdfPreviewNeedsUpdate: false,
             })
         })
     }
@@ -129,6 +154,12 @@ class App extends React.Component {
     render = () => {
 
         let pdfSettings = null;
+
+        let pdfPreviewElem = <PDFPreview data={this.state.pdf}/>
+        if (this.state.pdfPreviewNeedsUpdate && !this.state.firstTimePDFRender) {
+            pdfPreviewElem = <PDFPreviewRefresh onRefreshRequest={this.refreshPdfPreview} />
+        }
+
         if (this.state.dataModel) {
             pdfSettings = (
                 <div style={{display: 'flex', flexFlow: 'column'}}>
@@ -144,7 +175,7 @@ class App extends React.Component {
                                 <button className="SpecialButton" onClick={() => savePdf(this.state.dataModel)}>Save PDF...</button>
                             </div>
                         </div>
-                        <PDFPreview data={this.state.pdf}/>
+                        {pdfPreviewElem}
                         <PopUp onClose={this.togglePreviewPdf} isVisible={this.state.popupVisible}>
                             <button onClick={this.togglePreviewPdf}>X Close</button>
                             <PDFPreview data={this.state.pdf} inPopUp={true}/>
