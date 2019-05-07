@@ -48,8 +48,24 @@ const centerVertical = (posterData, childData) => {
 
 const addText = (doc, textData, posterData) => {
     let tmpText = textData.value
+
+    // FIXME
+    // let tmpFont = textData.graphic.fontWeight + ' ' +  textData.graphic.fontSize + 'px ' + textData.graphic.fontFamily
+    // let smnSize = getTextWidth(splitText[0], tmpFont)
+
+    doc.setFont(textData.graphic.fontFamily);
+    doc.setFontSize(textData.graphic.fontSize);
+    doc.setFontStyle(textData.graphic.fontStyle);
+
     // let splitText = doc.splitTextToSize(tmpText, textData.graphic.width / textData.graphic.fontSize * 20); // FIXME
     let splitText = doc.splitTextToSize(tmpText, textData.graphic.width); // FIXME
+
+    // ?? TODO
+    // if (splitText.length > 1) {
+    //     textData.graphic.fontSize -= 2
+    //     doc.setFontSize(textData.graphic.fontSize - 2);
+    //     splitText = doc.splitTextToSize(tmpText, textData.graphic.width);
+    // }
 
     let maxVal = 0
     let maxIndex = 0
@@ -59,13 +75,6 @@ const addText = (doc, textData, posterData) => {
             maxIndex = i
         }
     }
-    // FIXME
-    // let tmpFont = textData.graphic.fontWeight + ' ' +  textData.graphic.fontSize + 'px ' + textData.graphic.fontFamily
-    // let smnSize = getTextWidth(splitText[0], tmpFont)
-
-    doc.setFont(textData.graphic.fontFamily);
-    doc.setFontSize(textData.graphic.fontSize);
-    doc.setFontStyle(textData.graphic.fontStyle);
 
     // pdf.textAlign("text", {align: "center"}, x, y);
     let offsetX = textData.graphic.x
